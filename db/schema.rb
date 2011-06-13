@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613193108) do
+ActiveRecord::Schema.define(:version => 20110613193225) do
 
   create_table "courses", :force => true do |t|
     t.string   "course_number"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(:version => 20110613193108) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "timesheet_entries", ["timesheet_id", "date"], :name => "index_timesheet_entries_on_timesheet_id_and_date", :unique => true
+  add_index "timesheet_entries", ["timesheet_id"], :name => "index_timesheet_entries_on_timesheet_id"
 
   create_table "timesheets", :force => true do |t|
     t.integer  "student_id"
