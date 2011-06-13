@@ -10,7 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613184143) do
+ActiveRecord::Schema.define(:version => 20110613185219) do
+
+  create_table "timesheet_entries", :force => true do |t|
+    t.integer  "timesheet_id"
+    t.date     "date"
+    t.decimal  "hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "timesheets", :force => true do |t|
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
