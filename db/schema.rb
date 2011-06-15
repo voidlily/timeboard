@@ -10,16 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615173030) do
+ActiveRecord::Schema.define(:version => 20110615192840) do
 
   create_table "courses", :force => true do |t|
-    t.string   "course_number"
+    t.string   "name"
     t.integer  "professor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "courses", ["course_number"], :name => "index_courses_on_course_number", :unique => true
+  add_index "courses", ["name"], :name => "index_courses_on_course_number", :unique => true
   add_index "courses", ["professor_id"], :name => "index_courses_on_professor_id"
 
   create_table "holidays", :force => true do |t|
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20110615173030) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
   end
 
   add_index "users", ["account"], :name => "index_users_on_prism", :unique => true
