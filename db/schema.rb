@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615165414) do
+ActiveRecord::Schema.define(:version => 20110615173030) do
 
   create_table "courses", :force => true do |t|
     t.string   "course_number"
@@ -62,5 +62,6 @@ ActiveRecord::Schema.define(:version => 20110615165414) do
   end
 
   add_index "users", ["account"], :name => "index_users_on_prism", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
