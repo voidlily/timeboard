@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622174418) do
+ActiveRecord::Schema.define(:version => 20110625163347) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(:version => 20110622174418) do
 
   add_index "timesheet_entries", ["timesheet_id", "date"], :name => "index_timesheet_entries_on_timesheet_id_and_date", :unique => true
   add_index "timesheet_entries", ["timesheet_id"], :name => "index_timesheet_entries_on_timesheet_id"
+
+  create_table "timesheet_statuses", :force => true do |t|
+    t.integer  "timesheet_id"
+    t.string   "status"
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timesheet_statuses", ["timesheet_id", "status"], :name => "index_timesheet_statuses_on_timesheet_id_and_status"
 
   create_table "timesheets", :force => true do |t|
     t.integer  "student_id"
