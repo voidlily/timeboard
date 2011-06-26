@@ -1,4 +1,11 @@
 Timeboard::Application.routes.draw do
+
+  resources :timesheets do
+    member do
+      put :sign, :approve, :process
+      #or is this supposed to be POST? Will check when I have internet again
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
