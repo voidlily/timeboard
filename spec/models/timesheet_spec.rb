@@ -8,6 +8,13 @@ describe Timesheet do
   it "should create a new instance given valid attributes" do
     @student.timesheets.create!(@attr)
   end
+  
+  describe "validation" do
+    it "should require timesheets to last 2 weeks"
+    it "should make sure the start date is one day past a due date"
+    it "should make sure the end date is a due date"
+    it "should not allow timesheets to be created past the next due date"
+  end
 
   describe "student associations" do
     before(:each) do
