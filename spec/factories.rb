@@ -22,6 +22,10 @@ Factory.define :timesheet do |timesheet|
   timesheet.association :student
 end
 
+Factory.define :timesheet_status do |timesheet_status|
+  timesheet_status.association :timesheet
+end
+
 Factory.define :course do |course|
   course.name "TEST1000"
 end
