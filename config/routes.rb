@@ -6,6 +6,13 @@ Timeboard::Application.routes.draw do
       #or is this supposed to be POST? Will check when I have internet again
     end
   end
+  
+  match '/professor/list',	:to => 'professors#timesheet_list'
+  
+  root :to => 'pages#home'
+
+  get "pages/home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
