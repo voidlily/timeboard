@@ -32,7 +32,6 @@ GEM
       activesupport (= 3.1.0.rc4)
     activesupport (3.1.0.rc4)
       multi_json (~> 1.0)
-    annotate-models (1.0.4)
     ansi (1.2.5)
     arel (2.1.1)
     bcrypt-ruby (2.1.4)
@@ -135,7 +134,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate-models (= 1.0.4)
   coffee-script
   email_validation
   factory_girl_rails (~> 1.0.1)
