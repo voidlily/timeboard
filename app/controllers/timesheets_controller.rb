@@ -8,7 +8,7 @@ class TimesheetsController < ApplicationController
 
   def show
     #TODO probably vulnerable to direct reference
-    @timesheet = User.find(params[:id])
+    @timesheet = Timesheet.find(params[:id])
     @title = "Edit Timesheet"
   end
 
