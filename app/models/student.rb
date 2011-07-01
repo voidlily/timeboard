@@ -1,8 +1,3 @@
-class Student < User
-  has_many :timesheets, :dependent => :destroy
-  belongs_to :course
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -18,4 +13,9 @@ end
 #  updated_at  :datetime
 #  course_id   :integer
 #
+
+class Student < User
+  has_many :timesheets, :dependent => :destroy
+  belongs_to :course
+end
 

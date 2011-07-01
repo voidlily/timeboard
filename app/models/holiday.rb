@@ -1,6 +1,3 @@
-class Holiday < ActiveRecord::Base
-end
-
 # == Schema Information
 #
 # Table name: holidays
@@ -11,4 +8,7 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+
+class Holiday < ActiveRecord::Base
+end
 

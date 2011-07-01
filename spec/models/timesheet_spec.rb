@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: timesheets
+#
+#  id         :integer         not null, primary key
+#  student_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  start_date :date
+#  end_date   :date
+#
+
 require 'spec_helper'
 
 describe Timesheet do
@@ -87,16 +99,4 @@ describe Timesheet do
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: timesheets
-#
-#  id         :integer         not null, primary key
-#  student_id :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  start_date :date
-#  end_date   :date
-#
 

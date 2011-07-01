@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id           :integer         not null, primary key
+#  name         :string(255)
+#  professor_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require 'spec_helper'
 
 describe Course do
@@ -34,15 +45,4 @@ describe Course do
     course.students.should == students
   end
 end
-
-# == Schema Information
-#
-# Table name: courses
-#
-#  id           :integer         not null, primary key
-#  name         :string(255)
-#  professor_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
 

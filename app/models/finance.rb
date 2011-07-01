@@ -1,6 +1,3 @@
-class Finance < User
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -16,4 +13,7 @@ end
 #  updated_at  :datetime
 #  course_id   :integer
 #
+
+class Finance < User
+end
 

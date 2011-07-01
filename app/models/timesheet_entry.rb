@@ -1,6 +1,3 @@
-class TimesheetEntry < ActiveRecord::Base
-end
-
 # == Schema Information
 #
 # Table name: timesheet_entries
@@ -12,4 +9,7 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+
+class TimesheetEntry < ActiveRecord::Base
+end
 

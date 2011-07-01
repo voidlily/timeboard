@@ -1,9 +1,3 @@
-require 'spec_helper'
-
-describe TimesheetEntry do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
 # == Schema Information
 #
 # Table name: timesheet_entries
@@ -15,4 +9,10 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+
+require 'spec_helper'
+
+describe TimesheetEntry do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
 

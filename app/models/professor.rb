@@ -1,9 +1,3 @@
-class Professor < User
-  has_many :courses
-  has_many :students, :through => :courses
-  has_many :timesheets, :through => :students
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -19,4 +13,10 @@ end
 #  updated_at  :datetime
 #  course_id   :integer
 #
+
+class Professor < User
+  has_many :courses
+  has_many :students, :through => :courses
+  has_many :timesheets, :through => :students
+end
 

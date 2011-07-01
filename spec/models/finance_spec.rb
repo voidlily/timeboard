@@ -1,9 +1,3 @@
-require 'spec_helper'
-
-describe Finance do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -19,4 +13,10 @@ end
 #  updated_at  :datetime
 #  course_id   :integer
 #
+
+require 'spec_helper'
+
+describe Finance do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
 

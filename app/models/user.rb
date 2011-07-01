@@ -1,15 +1,3 @@
-class User < ActiveRecord::Base
-
-  attr_accessible :name, :account, :email
-
-  validates :name, :presence => true
-  validates :account, :presence => true,
-                      :uniqueness => { :case_sensitive => false }
-  validates :email, :presence => true,
-                    :email => true,
-                    :uniqueness => { :case_sensitive => false }
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -25,4 +13,16 @@ end
 #  updated_at  :datetime
 #  course_id   :integer
 #
+
+class User < ActiveRecord::Base
+
+  attr_accessible :name, :account, :email
+
+  validates :name, :presence => true
+  validates :account, :presence => true,
+                      :uniqueness => { :case_sensitive => false }
+  validates :email, :presence => true,
+                    :email => true,
+                    :uniqueness => { :case_sensitive => false }
+end
 
