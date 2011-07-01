@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: due_dates
+#
+#  id         :integer         not null, primary key
+#  date       :date
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class DueDate < ActiveRecord::Base
   def self.date
     DueDate.last.date
@@ -14,3 +24,4 @@ class DueDate < ActiveRecord::Base
     last.save
   end
 end
+

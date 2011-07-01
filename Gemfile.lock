@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/jeremyolliver/annotate_models.git
+  revision: 4d57e4fe6360125f17886168120a48091a268e45
+  branch: rake_compatibility
+  specs:
+    annotate (2.4.0)
+
+GIT
   remote: git://github.com/zuk/rubycas-client-rails.git
   revision: cec213ae2fbe508284ebbdd666f9cfc20fc86d46
   specs:
@@ -147,6 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   coffee-script
   email_validation
   factory_girl_rails (~> 1.0.1)
