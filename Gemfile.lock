@@ -1,5 +1,6 @@
-PATH
-  remote: ./rubycas-client-rails
+GIT
+  remote: git://github.com/zuk/rubycas-client-rails.git
+  revision: cec213ae2fbe508284ebbdd666f9cfc20fc86d46
   specs:
     rubycas-client-rails (0.0.1)
       rails (>= 3.0.0)

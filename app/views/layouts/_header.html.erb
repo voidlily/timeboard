@@ -2,7 +2,12 @@
   <%= link_to logo, root_path %>
   <nav class="round">
     <ul>
-      <li><%= link_to "Home", '#' %></li>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= if(session[:cas_user].nil?)
+                link_to( "Login", login_path)
+              else
+		link_to("Logout", logout_path)
+              end%></li>
     </ul>
   </nav>
 </header>
