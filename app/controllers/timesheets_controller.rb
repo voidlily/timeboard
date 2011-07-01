@@ -15,6 +15,7 @@ class TimesheetsController < ApplicationController
     temp_timesheet = Timesheet.find(params[:id])
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
+      @user = temp_timesheet.student
     end
     @title = "Edit Timesheet"
   end
