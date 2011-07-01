@@ -1,3 +1,10 @@
+PATH
+  remote: ./rubycas-client-rails
+  specs:
+    rubycas-client-rails (0.0.1)
+      rails (>= 3.0.0)
+      rubycas-client (>= 2.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -106,6 +113,8 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    rubycas-client (2.2.1)
+      activesupport
     sass (3.1.2)
     sass-rails (3.1.0.rc.2)
       actionpack (~> 3.1.0.rc1)
@@ -145,6 +154,8 @@ DEPENDENCIES
   rails (= 3.1.0.rc4)
   rspec
   rspec-rails
+  rubycas-client
+  rubycas-client-rails!
   sass-rails (~> 3.1.0.rc)
   sqlite3
   therubyracer
