@@ -106,6 +106,8 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    rubycas-client (2.2.1)
+      activesupport
     sass (3.1.2)
     sass-rails (3.1.0.rc.2)
       actionpack (~> 3.1.0.rc1)
@@ -145,6 +147,7 @@ DEPENDENCIES
   rails (= 3.1.0.rc4)
   rspec
   rspec-rails
+  rubycas-client
   sass-rails (~> 3.1.0.rc)
   sqlite3
   therubyracer

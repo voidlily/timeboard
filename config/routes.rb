@@ -1,5 +1,7 @@
 Timeboard::Application.routes.draw do
 
+  get "sessions/new"
+
   resources :timesheets do
     member do
       put :sign, :approve, :process

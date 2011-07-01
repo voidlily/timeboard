@@ -20,6 +20,8 @@ gem 'email_validation'
 gem 'holidays'
 gem 'whenever'
 
+gem 'rubycas-client'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
