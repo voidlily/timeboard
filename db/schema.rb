@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701223049) do
+ActiveRecord::Schema.define(:version => 20110701232720) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20110701223049) do
   create_table "timesheet_entries", :force => true do |t|
     t.integer  "timesheet_id"
     t.date     "date"
-    t.decimal  "hours"
+    t.decimal  "hours",        :default => 0.0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

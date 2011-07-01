@@ -164,7 +164,7 @@ DEPENDENCIES
   rspec
   rspec-rails
   rubycas-client
-  rubycas-client-rails
+  rubycas-client-rails!
   sass-rails (~> 3.1.0.rc)
   sqlite3
   therubyracer
