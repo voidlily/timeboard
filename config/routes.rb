@@ -8,11 +8,14 @@ Timeboard::Application.routes.draw do
   end
   
   match '/professor/list',	:to => 'professors#timesheet_list'
+  match '/login',		:to => 'pages#login'
+  match '/logout',		:to => 'pages#logout'
   
   root :to => 'pages#home'
 
   get "pages/home"
-
+  get "pages/login"
+  get "pages/logout"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
