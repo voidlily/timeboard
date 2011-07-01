@@ -1,6 +1,10 @@
 class TimesheetsController < ApplicationController
+  before_filter RubyCAS::Filter
+
   def index
     @title = "Timesheets"
+    @user = User.find_by_account(session[:cas_user])
+    @timesheet_list = @user.timesheets
     #TODO define current_user
     #blocked by cas implementation for sessions controller
     #@timesheets = current_user.timesheets
@@ -8,7 +12,10 @@ class TimesheetsController < ApplicationController
 
   def show
     #TODO probably vulnerable to direct reference
-    @timesheet = Timesheet.find(params[:id])
+    temp_timesheet = Timesheet.find(params[:id])
+    if (temp_timesheet.student.account == session[:cas_user])
+      @timesheet = temp_timesheet
+    end
     @title = "Edit Timesheet"
   end
 
@@ -20,6 +27,7 @@ class TimesheetsController < ApplicationController
 
   def edit
     #TODO what?
+
   end
 
   def create
@@ -28,6 +36,16 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
+    temp_timesheet = Timesheet.find(params[:id])
+    if (temp_timesheet.student.account == session[:cas_user])
+      @timesheet = temp_timesheet
+      if(@timesheet.update_attributes(params[:timesheet]))
+        redirect_to @timesheet
+      else
+        render 'show'
+      end
+    end
+
   end
 
   #TODO sign? approve? how to make it RESTful?

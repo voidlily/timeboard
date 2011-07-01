@@ -14,6 +14,9 @@ gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
 
+gem 'rubycas-client'
+gem 'rubycas-client-rails', :path => './rubycas-client-rails'
+
 gem 'jquery-rails'
 
 gem 'email_validation'
