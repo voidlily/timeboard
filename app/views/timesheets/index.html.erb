@@ -1,11 +1,11 @@
-<% 
+<%= 
   if (@user.type == "Student")
-  
-  else if
-
-  else if
-
+    render 'timesheets/prof_index'
+  elsif(@user.type == "Professor")
+    render 'timesheets/prof_index'
+  elsif(@user.type == "Finance")
+    render 'pages/home'
   else
-
+    render 'pages/home'
   end
 %>
