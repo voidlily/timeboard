@@ -5,7 +5,7 @@
 #  id           :integer         not null, primary key
 #  timesheet_id :integer
 #  date         :date
-#  hours        :decimal(, )
+#  hours        :decimal(, )     default(0.0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
 #
