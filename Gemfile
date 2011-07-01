@@ -15,7 +15,7 @@ gem 'coffee-script'
 gem 'uglifier'
 
 gem 'rubycas-client'
-gem 'rubycas-client-rails', :path => './rubycas-client-rails'
+gem 'rubycas-client-rails', :git => "git://github.com/zuk/rubycas-client-rails.git"
 
 gem 'jquery-rails'
 
