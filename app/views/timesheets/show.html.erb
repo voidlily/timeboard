@@ -12,9 +12,7 @@
 	text-align: left;
     }
 </style>
-
-<% Time::DATE_FORMATS[:custom] = "%b %d, %Y" %>
-
+<% timesheet_entries = @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at } %>
 <div id="timesheet">
     <h3>
 	<%= @user.name %> <br />
