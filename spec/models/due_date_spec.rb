@@ -12,3 +12,14 @@ describe DueDate do
     DueDate.date.should == Date.today + 2.weeks
   end
 end
+
+# == Schema Information
+#
+# Table name: due_dates
+#
+#  id         :integer         not null, primary key
+#  date       :date
+#  created_at :datetime
+#  updated_at :datetime
+#
+

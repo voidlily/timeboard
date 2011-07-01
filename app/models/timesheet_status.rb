@@ -10,3 +10,16 @@ class TimesheetStatus < ActiveRecord::Base
   validates :status, :presence => true,
                      :inclusion => types
 end
+
+# == Schema Information
+#
+# Table name: timesheet_statuses
+#
+#  id           :integer         not null, primary key
+#  timesheet_id :integer
+#  status       :string(255)
+#  reason       :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

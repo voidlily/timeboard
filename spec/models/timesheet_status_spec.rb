@@ -24,3 +24,16 @@ describe TimesheetStatus do
     @timesheet_status.should_not be_valid
   end
 end
+
+# == Schema Information
+#
+# Table name: timesheet_statuses
+#
+#  id           :integer         not null, primary key
+#  timesheet_id :integer
+#  status       :string(255)
+#  reason       :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
