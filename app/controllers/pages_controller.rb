@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   before_filter RubyCAS::Filter, :only => :login
- # before_filter RubyCAS::Filter.logout(self), :only => :logout 
 
   def home
   end
@@ -10,7 +9,7 @@ class PagesController < ApplicationController
   end
 
   def logout
-   # RubyCAS::Filter.logout(self, :destination => "http://localhost:3000/")
+    RubyCAS::Filter.logout(self)
   end
 end
 
