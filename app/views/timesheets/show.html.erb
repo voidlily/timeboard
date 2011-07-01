@@ -13,12 +13,12 @@
     }
 </style>
 
-
+<% Time::DATE_FORMATS[:custom] = "%b %d, %Y" %>
 
 <div id="timesheet">
     <h3>
 	<%= @user.name %> <br />
-	CS 1331 <br />
+<!--	CS 1331 <br /> --!>
     </h3>
     <table width="100%">
 	<tr>
@@ -32,7 +32,7 @@
 	    <th> Wed </th>
 	</tr>
 	<tr>
-	    <td> Jan 1st 2011 - Jan 7th 2011
+	    <td> <%= @timesheet.start_date.to_s(:rfc822) %> - <%= (@timesheet.start_date + 6.days).to_s(:rfc822) %>
 	    <td> <input type="text"> </td>
 	    <td> <input type="text"> </td> 
 	    <td> <input type="text"> </td> 
@@ -42,7 +42,7 @@
 	    <td> <input type="text"> </td> 
 	</tr>
 	<tr>
-	    <td> Jan 8th 2011 - Jan 14th 2011
+	    <td> <%= (@timesheet.end_date - 6.days).to_s(:rfc822) %> - <%= @timesheet.end_date.to_s(:rfc822) %>
 	    <td> <input type="text"> </td>
 	    <td> <input type="text"> </td> 
 	    <td> <input type="text"> </td> 
