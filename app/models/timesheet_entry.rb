@@ -12,5 +12,10 @@
 
 class TimesheetEntry < ActiveRecord::Base
   belongs_to :timesheet
+
+  validates :date, :presence => true
+  validates :hours, :presence => true
+
+  validates_numericality_of :hours, :greater_than_or_equal_to => 0
 end
 
