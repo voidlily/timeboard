@@ -59,5 +59,13 @@ class Timesheet < ActiveRecord::Base
   def process!
     self.timesheet_statuses.create(:status => "Processed")
   end
+
+  def hours
+    hours = 0
+    self.timesheet_entries.each do |entry|
+      hours = hours + entry.hours
+    end
+    return hours
+  end
 end
 

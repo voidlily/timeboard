@@ -26,10 +26,10 @@
           <%= timesheet.student.name %>
         </td>
         <td>
-          <%= link_to "Somedate", :controller => :timesheets, :action => :show, :id => timesheet.id%>
+          <%= link_to "#{timesheet.start_date}-#{timesheet.end_date}", :controller => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
         <td>
-          <%= link_to "Somehours", :controller => :timesheets, :action => :show, :id => timesheet.id%>
+          <%= link_to timesheet.hours.to_s, :controller => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
       </tr>
       <% end %>
