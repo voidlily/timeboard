@@ -32,10 +32,10 @@
           <%= timesheet.student.name %>
         </td>
         <td>
-          Somedate
+          <%= link_to "Somedate", :controler => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
         <td>
-          Somehours
+          <%= link_to "Somehours", :controler => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
         <% if @requested_status == "Signed" %>
         <td>
