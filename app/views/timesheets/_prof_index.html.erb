@@ -1,4 +1,7 @@
+
+<% @working_list = @timesheet_list.where(signed?)%>
 <h1>Timesheets</h1>
+<p>Welcome <%= @user.name%> </p>
 
 <div id="prof-timesheet-list">
   <table class="listview">
@@ -47,6 +50,22 @@
           <input type="checkbox">
         </td>
       </tr>
+      <% @timesheet_list.each do |timesheet| %>
+      <tr>
+        <td>
+          <%= timesheet.student.name %>
+        </td>
+        <td>
+          Somedate
+        </td>
+        <td>
+          Somehours
+        </td>
+        <td>
+          <input type="checkbox">
+        </td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

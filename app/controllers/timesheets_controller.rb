@@ -1,5 +1,6 @@
 class TimesheetsController < ApplicationController
   before_filter RubyCAS::Filter
+  before_filter :check_for_user_in_db
 
   def index
     @title = "Timesheets"
@@ -50,5 +51,11 @@ class TimesheetsController < ApplicationController
   end
 
   #TODO sign? approve? how to make it RESTful?
+  private
 
+  def check_for_user_in_db
+    if(User.find_by_account(session[:cas_user]).nil?)
+      redirect_to root_path
+    end
+  end
 end
