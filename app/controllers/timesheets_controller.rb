@@ -40,6 +40,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
+    @user = User.find_by_account(session[:cas_user])
     temp_timesheet = Timesheet.find(params[:id])
     if(User.find_by_account(session[:cas_user]).type == "Professor")
       approve
@@ -49,7 +50,8 @@ class TimesheetsController < ApplicationController
       if(@timesheet.update_attributes(params[:timesheet]))
 	redirect_to @timesheet
       else
-        render 'show'
+	flash[:notice] = @timesheet.errors.full_messages
+        render "show"
       end
     end
 
