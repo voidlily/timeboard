@@ -46,10 +46,8 @@ class TimesheetsController < ApplicationController
     end
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
-      @timesheet.timesheet_entries[0].hours = params[:entry0] 
-      @timesheet.timesheet_entries[0].save
       if(@timesheet.update_attributes(params[:timesheet]))
-        redirect_to @timesheet
+	redirect_to @timesheet
       else
         render 'show'
       end
