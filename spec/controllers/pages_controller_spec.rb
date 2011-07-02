@@ -9,7 +9,7 @@ describe PagesController do
       end
       it "should return a successful CAS login"
       it "should redirect to homepage" do
-        response.should redirect_to(root_path)
+        response.should render_template("pages/home")
       end
       it "should display an error" do
         flash.now[:error].should =~ /access/i
@@ -24,7 +24,7 @@ describe PagesController do
       end
       it "should return a successful CAS login"
       it "should redirect to homepage" do
-        response.should redirect_to(root_path)
+        response.should render_template("pages/home")
       end
       it "should not display an error" do
         flash.now[:error].should_not =~ /access/i
