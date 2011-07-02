@@ -2,6 +2,9 @@ Timeboard::Application.routes.draw do
 
   get "sessions/new"
 
+  resources :courses
+  resources :users
+ 
   resources :timesheets do
     member do
       put :sign, :approve, :process

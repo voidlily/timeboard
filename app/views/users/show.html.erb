@@ -1,0 +1,20 @@
+<h1><%= @user.name %></h1>
+
+
+<%if(@user.type == "Student")%>
+<h2>
+  <%= link_to @user.course.name, :controller => :courses, :action => :show, :id => @user.course.id%>
+</h2>
+<%elsif(@user.type == "Professor")%>
+  <h2>Courses</h2>
+  <ul id="professor-course-list" style="list-style-type:none;">
+  <% @user.courses.each do |course| %>
+    <li>
+      <%= link_to course.name, :controller => :courses, :action => :show, :id => course.id%>
+    <li>
+  <% end %>
+  </ul>
+
+<% end %>
+
+
