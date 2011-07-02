@@ -17,6 +17,7 @@
 	<%= @user.name %> <br />
 	<%= @timesheet.timesheet_entries[1].hours %>  
     </h3>
+    <form name="updateTimesheetForm" action="update" method="post">
     <table width="100%">
 	<tr>
 	    <th />
@@ -30,13 +31,8 @@
 	</tr>
 	<tr>
 	    <td> <%= @timesheet.start_date.to_s(:rfc822) %> - <%= (@timesheet.start_date + 6.days).to_s(:rfc822) %> </td>
-	    <td> <input type="text"> </td>
-	    <td> <input type="text"> </td> 
-	    <td> <input type="text"> </td> 
-	    <td> <input type="text"> </td> 
-	    <td> <input type="text"> </td> 
-	    <td> <input type="text"> </td> 
-	    <td> <input type="text"> </td> 
+	    <td> <input type="text" id="entry0"> </td>
+	    <td> <input type="text" id="entry1"> </td> 
 	</tr>
 	<tr>
 	    <td> <%= (@timesheet.end_date - 6.days).to_s(:rfc822) %> - <%= @timesheet.end_date.to_s(:rfc822) %> </td>
@@ -49,5 +45,6 @@
 	    <td> <input type="text"> </td> 
 	</tr>
     <table>
-    <% end %>
+    <input type="submit">
+    </form>
 </div>
