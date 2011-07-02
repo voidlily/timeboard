@@ -16,6 +16,9 @@
     </div>
     <div id="mainview" class="span-20 round last">
       <div id="mainview-inner">
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
         <%= yield %>
       </div>
     </div>
