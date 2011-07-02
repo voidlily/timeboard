@@ -6,6 +6,8 @@ class TimesheetsController < ApplicationController
     @title = "Timesheets"
     @user = User.find_by_account(session[:cas_user])
     @timesheet_list = @user.timesheets
+    @requested_status = params[:status].nil? ? "Signed" : params[:status]
+    @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
     #TODO define current_user
     #blocked by cas implementation for sessions controller
     #@timesheets = current_user.timesheets
@@ -39,8 +41,13 @@ class TimesheetsController < ApplicationController
   def update
     #TODO: depends on frontend
     temp_timesheet = Timesheet.find(params[:id])
+    if(User.find_by_account(session[:cas_user]).type == "Professor")
+      approve
+    end
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
+      @timesheet.timesheet_entries[0].hours = params[:entry0] 
+      @timesheet.timesheet_entries[0].save
       if(@timesheet.update_attributes(params[:timesheet]))
         redirect_to @timesheet
       else
@@ -49,9 +56,21 @@ class TimesheetsController < ApplicationController
     end
 
   end
-
+  
+  
   #TODO sign? approve? how to make it RESTful?
   private
+
+  def approve
+    professor = User.find_by_account(session[:cas_user])
+    timesheets = professor.timesheets.select{|timesheet| timesheet.status == "Signed"}
+    timesheets.each do |timesheet|
+      if(params[timesheet.id.to_s]=="Approved")
+        timesheet.approve!
+      end
+    end
+    redirect_to timesheets_path
+  end
 
   def check_for_user_in_db
     if(User.find_by_account(session[:cas_user]).nil?)

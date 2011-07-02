@@ -1,8 +1,10 @@
 
-<% @working_list = @timesheet_list.where(signed?)%>
-<h1>Timesheets</h1>
 <p>Welcome <%= @user.name%> </p>
-
+<% if(@timesheet_list.empty?) %>
+<h1>No <%= @requested_status.downcase%> timesheets</hi>
+<% else %>
+<h1><%= @requested_status %> timesheets</h1>
+<%= form_tag({:controller => :timesheets, :action => :update, :id => @timesheet_list.first}, :method => :put ) do %>
 <div id="prof-timesheet-list">
   <table class="listview">
     <thead>
@@ -16,60 +18,39 @@
         <th>
           Hours
         </th>           
-        <th>
+        <% if @requested_status == "Signed" %> 
+	<th>
           Approve
-        </th>           
+        </th>
+        <% end %>           
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          Example Name
-        </td>
-        <td>
-          Example Date
-        </td>
-        <td>
-          40
-        </td>
-        <td>
-          <input type="checkbox">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Other Name
-        </td>
-        <td>
-          Another Date
-        </td>
-        <td>
-          30
-        </td>
-        <td>
-          <input type="checkbox">
-        </td>
-      </tr>
       <% @timesheet_list.each do |timesheet| %>
       <tr>
         <td>
           <%= timesheet.student.name %>
         </td>
         <td>
-          Somedate
+          <%= link_to "Somedate", :controller => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
         <td>
-          Somehours
+          <%= link_to "Somehours", :controller => :timesheets, :action => :show, :id => timesheet.id%>
         </td>
+        <% if @requested_status == "Signed" %>
         <td>
-          <input type="checkbox">
+          <%= check_box_tag timesheet.id, "Approved" %>
         </td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<div class="submit-button">
-  <input type="submit" value="Approve" />
-</div>
+  <% if @requested_status == "Signed" %>
+  <div class="submit-button">
+    <%= submit_tag "Approve" %>
+  </div>
+  <% end %>
+<% end %>
+<% end %>

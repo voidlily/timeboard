@@ -1,0 +1,33 @@
+
+<p>Welcome <%= @user.name%> </p>
+<% if(@course_list.empty?) %>
+<h1>You own no courses</hi>
+<% else %>
+<h1>Courses</h1>
+<div id="prof-course-list">
+  <table class="listview">
+    <thead>
+      <tr>
+        <th>
+          Course Name
+        </th>           
+        <th>
+          Number of Students
+        </th>           
+      </tr>
+    </thead>
+    <tbody>
+      <% @course_list.each do |course| %>
+      <tr>
+        <td>
+          <%= link_to course.name, :controller => :courses, :action => :show, :id => course.id%>
+        </td>
+        <td>
+          <%= link_to course.students.count.to_s, :controller => :courses, :action => :show, :id => course.id%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

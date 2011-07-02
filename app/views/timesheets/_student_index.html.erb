@@ -1,0 +1,39 @@
+
+<p>Welcome <%= @user.name%> </p>
+<% if(@timesheet_list.empty?) %>
+<h1>No <%= @requested_status.downcase%> timesheets</hi>
+<% else %>
+<h1><%= @requested_status %> timesheets</h1>
+<div id="student-timesheet-list">
+  <table class="listview">
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>           
+        <th>
+          Date
+        </th>           
+        <th>
+          Hours
+        </th>           
+      </tr>
+    </thead>
+    <tbody>
+      <% @timesheet_list.each do |timesheet| %>
+      <tr>
+        <td>
+          <%= timesheet.student.name %>
+        </td>
+        <td>
+          <%= link_to "Somedate", :controller => :timesheets, :action => :show, :id => timesheet.id%>
+        </td>
+        <td>
+          <%= link_to "Somehours", :controller => :timesheets, :action => :show, :id => timesheet.id%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

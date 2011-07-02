@@ -1,8 +1,8 @@
 <%= 
   if (@user.type == "Student")
-    render 'timesheets/student_index'
+    render 'courses/student_index'
   elsif(@user.type == "Professor")
-    render 'timesheets/prof_index'
+    render 'courses/prof_index'
   elsif(@user.type == "Finance")
     render 'pages/home'
   else
