@@ -14,7 +14,7 @@ class Timesheet < ActiveRecord::Base
   belongs_to :student
   has_many :timesheet_statuses
   has_many :timesheet_entries
-
+  accepts_nested_attributes_for :timesheet_entries
   def status
     entry = TimesheetStatus.current(self.id).first
     entry.nil? ? "Draft" : entry.status

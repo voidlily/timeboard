@@ -40,18 +40,30 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
+    @user = User.find_by_account(session[:cas_user])
     temp_timesheet = Timesheet.find(params[:id])
     if(User.find_by_account(session[:cas_user]).type == "Professor")
       approve
     end
+    bol = true
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
-      @timesheet.timesheet_entries[0].hours = params[:entry0] 
-      @timesheet.timesheet_entries[0].save
-      if(@timesheet.update_attributes(params[:timesheet]))
-        redirect_to @timesheet
+      input_entry_changes = params[:timesheet][:timesheet_entries_attributes]
+      @timesheet.timesheet_entries.each do |tse|
+	change = input_entry_changes[tse.id.to_s]
+	if change
+	  tse.hours = change[:hours]
+	  bol = tse.save
+	else
+	  flash[:notice] = "Error Occurred." 
+	  redirect_to @timesheet
+	  return
+	end
+      end
+      if (bol)
+	redirect_to @timesheet
       else
-        render 'show'
+	redirect_to @timesheet
       end
     end
 
