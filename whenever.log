@@ -1,0 +1,28 @@
+ran
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/seniordesign/timeboard/timeboard
+ran
+/home/andrew/.rvm/gems/ruby-1.9.2-p180@timeboard/gems/railties-3.1.0.rc4/lib/rails/commands/runner.rb:49:in `eval': undefined method `exists' for File:Class (NoMethodError)
+	from (eval):1:in `<top (required)>'
+	from /home/andrew/.rvm/gems/ruby-1.9.2-p180@timeboard/gems/railties-3.1.0.rc4/lib/rails/commands/runner.rb:49:in `eval'
+	from /home/andrew/.rvm/gems/ruby-1.9.2-p180@timeboard/gems/railties-3.1.0.rc4/lib/rails/commands/runner.rb:49:in `<top (required)>'
+	from /home/andrew/.rvm/gems/ruby-1.9.2-p180@timeboard/gems/railties-3.1.0.rc4/lib/rails/commands.rb:63:in `require'
+	from /home/andrew/.rvm/gems/ruby-1.9.2-p180@timeboard/gems/railties-3.1.0.rc4/lib/rails/commands.rb:63:in `<top (required)>'
+	from script/rails:6:in `require'
+	from script/rails:6:in `<main>'
+ran
+offweek

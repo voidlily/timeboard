@@ -40,6 +40,10 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
+    if params[:commit] == "Sign"
+      sign
+      return
+    end
     @user = User.find_by_account(session[:cas_user])
     temp_timesheet = Timesheet.find(params[:id])
     if(User.find_by_account(session[:cas_user]).type == "Professor")
@@ -82,6 +86,19 @@ class TimesheetsController < ApplicationController
       end
     end
     redirect_to timesheets_path
+  end
+
+  def sign
+    student = User.find_by_account(session[:cas_user])
+    @timesheet = Timesheet.find(params[:id])
+    if student.type == "Professor"
+      approve
+    elsif student.type == "Student"
+      @timesheet.sign!
+    end
+    flash[:notice] = "Timesheet has been signed"
+    redirect_to @timesheet
+    
   end
 
   def check_for_user_in_db

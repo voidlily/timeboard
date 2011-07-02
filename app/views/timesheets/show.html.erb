@@ -1,6 +1,9 @@
 <style type="text/css">
-    input {
+    input[type="text"] {
 	width: 40px;
+    }
+    input[type="submit"] {
+	width: 80px;
     }
     h3 {
 	text-align: center;
@@ -10,6 +13,9 @@
     }
     th {
 	text-align: left;
+    }
+    #buttonPanel {
+	text-align: center;	
     }
 </style>
 <div id="timesheet">
@@ -47,7 +53,9 @@
 	    <% end %> 
 	</tr>
     <table>
-    <%= submit_tag %>
+    <div id="buttonPanel">
+	<%= submit_tag "Save"%>
+	<%= submit_tag "Sign"%>
+    </div>
     <% end %>
-
 </div>
