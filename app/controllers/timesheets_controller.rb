@@ -6,6 +6,8 @@ class TimesheetsController < ApplicationController
     @title = "Timesheets"
     @user = User.find_by_account(session[:cas_user])
     @timesheet_list = @user.timesheets
+    @requested_status = params[:status].nil? ? "Signed" : params[:status]
+    @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
     #TODO define current_user
     #blocked by cas implementation for sessions controller
     #@timesheets = current_user.timesheets
