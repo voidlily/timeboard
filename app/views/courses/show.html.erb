@@ -1,0 +1,12 @@
+<h1><%= @course.name %></h1>
+
+<h3><%= link_to @course.professor.name, :controller => :users, :action => :show, :id => @course.professor.id%></h3>
+
+<h2>Students<h2>
+<ul id="course-student-list" style="list-style-type: none;">
+<% @course.students.each do |student| %>
+  <li>
+    <%= link_to student.name, :controller => :users, :action => :show, :id => student.id%>
+  <li>
+<% end %>
+</ul>

@@ -15,7 +15,7 @@
 <div id="timesheet">
     <h3>
 	<%= @user.name %> <br />
-	<%= @timesheet.timesheet_entries[1].hours %>  
+	<%= @timesheet.timesheet_entries[0].hours %>  
     </h3>
     <%= form_for(@timesheet, :url => { :controller => "timesheets", :action => "update" }) do |form| %>
     <table width="100%">
