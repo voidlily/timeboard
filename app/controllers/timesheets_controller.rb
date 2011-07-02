@@ -15,6 +15,7 @@ class TimesheetsController < ApplicationController
 
   def show
     #TODO probably vulnerable to direct reference
+    @user = User.find_by_account(session[:cas_user])
     temp_timesheet = Timesheet.find(params[:id])
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
