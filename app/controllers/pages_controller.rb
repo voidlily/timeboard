@@ -19,7 +19,10 @@ class PagesController < ApplicationController
     unless session[:cas_user].nil?
       if User.find_by_account(session[:cas_user]).nil? 
         flash[:error] = "User not found in Timeboard database."
+      else
+	@user = User.find_by_account(session[:cas_user])
       end
+      
     end
   end
 end
