@@ -38,7 +38,7 @@
 	    <td> <%= @timesheet.start_date.to_s(:rfc822) %> - <%= (@timesheet.start_date + 6.days).to_s(:rfc822) %> </td>
 	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[0,7].each do |entry| %>
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
-		    <td><%= fields.text_field :hours %></td>
+		    <td><%= fields.text_field :hours , :disabled => true %></td>
 		    <%= fields.hidden_field :date %>
 		<% end %>
 	    <% end %> 
@@ -47,15 +47,16 @@
 	    <td> <%= (@timesheet.end_date - 6.days).to_s(:rfc822) %> - <%= @timesheet.end_date.to_s(:rfc822) %> </td>
 	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[7,14].each do |entry| %>
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
-		    <td><%= fields.text_field :hours %></td>
+		    <td><%= fields.text_field :hours, :disabled => true %></td>
 		    <%= fields.hidden_field :date %>
 		<% end %>
 	    <% end %> 
 	</tr>
     <table>
     <div id="buttonPanel">
-	<%= submit_tag "Save"%>
-	<%= submit_tag "Sign"%>
+	<% if @timesheet.status == "Signed" %>
+	  <%= submit_tag "Approve"%>
+	<% end %>
     </div>
     <% end %>
 </div>

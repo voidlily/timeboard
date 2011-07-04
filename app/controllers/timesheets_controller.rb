@@ -20,8 +20,12 @@ class TimesheetsController < ApplicationController
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       @user = temp_timesheet.student
+      @title = "Edit Timesheet"
+    elsif (@user.type == 'Professor')
+      @timesheet = temp_timesheet
+      @student = temp_timesheet.student
+      @title = "Approve Timesheet"
     end
-    @title = "Edit Timesheet"
   end
 
   def new
@@ -41,7 +45,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
-    if params[:commit] == "Sign"
+    if params[:commit] == "Sign" || params[:commit] == "Approve"
       sign
       return
     end
@@ -93,11 +97,12 @@ class TimesheetsController < ApplicationController
     student = User.find_by_account(session[:cas_user])
     @timesheet = Timesheet.find(params[:id])
     if student.type == "Professor"
-      approve
+      @timesheet.approve!
+      flash[:notice] = "Timesheet has been approved."
     elsif student.type == "Student"
       @timesheet.sign!
+      flash[:notice] = "Timesheet has been signed."
     end
-    flash[:notice] = "Timesheet has been signed"
     redirect_to @timesheet
     
   end
