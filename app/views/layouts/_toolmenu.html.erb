@@ -2,13 +2,20 @@
   <li>
     <span>Timesheets</span>
   </li>
+  <% if @user != nil %>
   <li>
     <%= link_to "Current", '#', :class => "toollink"%>
   </li>
+  <% if @user.type == 'Student' %>
+    <li>
+      <%= link_to "Drafts", 'timesheets?status=Draft', :class => "toollink" %>
+    </li>
+  <% end %>
   <li>
     <%= link_to "Outstanding", '#', :class => "toollink"%>
   </li>
   <li>
-    <%= link_to "Approved", '#', :class => "toollink"%>
+    <%= link_to "Approved", 'timesheets?status=Approved', :class => "toollink"%>
   </li>
+  <% end %>
 </ul>
