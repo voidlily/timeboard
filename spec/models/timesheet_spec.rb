@@ -15,6 +15,8 @@ require 'spec_helper'
 describe Timesheet do
   before(:each) do
     @student = Factory(:student)
+    @attr = { :start_date => "2011-01-01",
+              :end_date => "2011-01-14"}
   end
 
   it "should create a new instance given valid attributes" do
@@ -22,7 +24,16 @@ describe Timesheet do
   end
   
   describe "validation" do
-    it "should require timesheets to last 2 weeks"
+    before(:each) do
+      @timesheet = Timesheet.new({
+        :student => @student,
+        :start_date => "2011-01-01",
+        :end_date => "2011-01-14"})
+    end
+    it "should require timesheets to last 2 weeks" do
+      @timesheet.end_date = "2011-01-02"
+      @timesheet.should_not be_valid
+    end
     it "should make sure the start date is one day past a due date"
     it "should make sure the end date is a due date"
     it "should not allow timesheets to be created past the next due date"
@@ -31,6 +42,9 @@ describe Timesheet do
   describe "student associations" do
     before(:each) do
       @timesheet = @student.timesheets.create
+      @timesheet.start_date = "2011-01-01"
+      @timesheet.end_date = "2011-01-14"
+      @timesheet.save
     end
 
     it "should have a student attribute" do
@@ -46,6 +60,9 @@ describe Timesheet do
   describe "workflow" do
     before(:each) do
       @timesheet = @student.timesheets.create
+      @timesheet.start_date = "2011-01-01"
+      @timesheet.end_date = "2011-01-14"
+      @timesheet.save
     end
 
     it "should start as a draft" do

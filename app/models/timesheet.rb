@@ -15,6 +15,10 @@ class Timesheet < ActiveRecord::Base
   has_many :timesheet_statuses
   has_many :timesheet_entries
   accepts_nested_attributes_for :timesheet_entries
+  validates :start_date, :presence => true
+  validates :end_date, :presence => true
+  #validates_numericality_of :timesheet_length, :equal_to => 13
+
   def status
     entry = TimesheetStatus.current(self.id).first
     entry.nil? ? "Draft" : entry.status
@@ -67,5 +71,12 @@ class Timesheet < ActiveRecord::Base
     end
     return hours
   end
+
+  private
+  
+  def timesheet_length
+    self.end_date - self.start_date
+  end
+
 end
 

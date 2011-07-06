@@ -55,6 +55,11 @@ describe Professor do
       end
       @timesheet1 = @student1.timesheets.create
       @timesheet2 = @student2.timesheets.create
+      [@timesheet1, @timesheet2].each do |t|
+        t.start_date = "2011-01-01"
+        t.end_date = "2011-01-14"
+        t.save
+      end
     end
     it "should respond to timesheets" do
       @professor.should respond_to(:timesheets)

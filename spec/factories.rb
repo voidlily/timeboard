@@ -19,6 +19,8 @@ Factory.define :professor do |professor|
 end
 
 Factory.define :timesheet do |timesheet|
+  timesheet.start_date "2011-01-01".to_date
+  timesheet.end_date "2011-01-14".to_date
   timesheet.association :student
 end
 
