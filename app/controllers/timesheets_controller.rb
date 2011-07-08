@@ -70,6 +70,7 @@ class TimesheetsController < ApplicationController
 	end
       end
       if (bol)
+	flash[:notice] = "Timesheet was successfully saved"
 	redirect_to @timesheet
       else
 	redirect_to @timesheet
