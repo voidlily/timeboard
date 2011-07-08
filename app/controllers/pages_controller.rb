@@ -11,20 +11,21 @@ class PagesController < ApplicationController
     if (user.nil?)
       redirect_to root_path
       return
-    end
-    if user.type == "Student"
-      #TODO make this go to current timesheet.
-      if (user.current_timesheet == nil)
-	redirect_to timesheets_path(:status => "Drafts")
-      else
-	redirect_to user.current_timesheet
-      end
-    elsif user.type == "Professor"
-      redirect_to timesheets_path(:status => "Signed")
-    elsif user.type == "Finance"
-      redirect_to timesheets_path(:status => "Approved")
     else
-      redirect_to root_path
+      if user.type == "Student"
+        #TODO make this go to current timesheet.
+        if (user.current_timesheet == nil)
+          redirect_to timesheets_path(:status => "Drafts")
+        else
+	  redirect_to user.current_timesheet
+        end
+      elsif user.type == "Professor"
+        redirect_to timesheets_path(:status => "Signed")
+      elsif user.type == "Finance"
+        redirect_to timesheets_path(:status => "Approved")
+      else
+        redirect_to root_path
+      end
     end
   end
 
