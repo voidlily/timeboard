@@ -20,8 +20,8 @@
 set :environment, :development
 set :output, '/home/andrew/seniordesign/timeboard/timeboard/whenever.log'
 
-#every :thursday, :at => "00:05" do
-every 1.minute do
+every :thursday, :at => "00:05" do
+#every 1.minute do
   runner "AddAndOutdateTimesheets.process"
 end
 
