@@ -2,25 +2,23 @@
   <li>
     <span>Timesheets</span>
   </li>
-  <% if @user != nil %>
-  <li>
-    <%= link_to "Current", '#', :class => "toollink"%>
-  </li>
-  <% if @user.type == 'Student' %>
+  <% if @user != nil  %>
+    <% if @user.type == 'Student'  %>
+      <li>
+        <%= link_to "Current", @user.current_timesheet, :class => "toollink"%>
+      </li>
+      <li>
+        <%= link_to "Drafts", timesheets_path(:status => "Draft"), :class => "toollink" %>
+      </li>
+    <% end %>
     <li>
-      <%= link_to "Drafts", '\timesheets?status=Draft', :class => "toollink" %>
+      <%= link_to "Signed", timesheets_path(:status => "Signed"), :class => "toollink" %>
     </li>
-  <% end %>
-  <% if @user.type == 'Professor' %>
     <li>
-      <%= link_to "Signed", '\timesheets?status=Signed', :class => "toollink" %>
+      <%= link_to "Approved", timesheets_path(:status => "Approved") , :class => "toollink"%>
     </li>
-  <% end %>
-  <li>
-    <%= link_to "Outstanding", '#', :class => "toollink"%>
-  </li>
-  <li>
-    <%= link_to "Approved", '\timesheets?status=Approved', :class => "toollink"%>
-  </li>
+    <li>
+      <%= link_to "Processed", timesheets_path(:status => "Processed"), :class => "toollink" %>
+    </li>
   <% end %>
 </ul>
