@@ -55,7 +55,7 @@
     <table>
     <div id="buttonPanel">
 	<% if @timesheet.status == "Signed" %>
-	  <%= submit_tag "Approve"%>
+	  <%= submit_tag "Approve", :confirm => "I do hereby certify that the hours shown on the above time report are true and correct to the best of my knowledge and belief." %>
 	<% end %>
     </div>
     <% end %>
