@@ -31,6 +31,11 @@ class TimesheetsController < ApplicationController
       @timesheet = temp_timesheet
       @student = temp_timesheet.student
       @title = "Approve Timesheet"
+      if @user.students.index(@student).nil?
+	flash[:error] = "You cannot view this timesheet"
+	redirect_to timesheets_path
+	return
+      end
     elsif (@user.type == 'Finance')
       @timesheet = temp_timesheet
       @student= temp_timesheet.student
