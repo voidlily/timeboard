@@ -1,5 +1,18 @@
-
-<p>Welcome <%= @user.name%> </p>
+<script text="text/javascript"> 
+  $(document).ready(function(){$('#select-all').click(function(event) {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    } else {
+      $(':checkbox').each(function() {
+        this.checked = false;
+      });
+    }
+  });
+  });
+</script>
+<p id="welcome">Welcome <%= @user.name%> </p>
 <% if(@timesheet_list.empty?) %>
 <h1>No <%= @requested_status.downcase%> timesheets</hi>
 <% else %>
@@ -21,6 +34,8 @@
         <% if @requested_status == "Signed" %> 
 	<th>
           Approve
+          
+	  <input type="checkbox" name="select-all" id="select-all" />
         </th>
         <% end %>           
       </tr>
