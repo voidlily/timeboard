@@ -16,7 +16,13 @@ class TimesheetsController < ApplicationController
   def show
     #TODO probably vulnerable to direct reference
     @user = User.find_by_account(session[:cas_user])
-    temp_timesheet = Timesheet.find(params[:id])
+    begin
+      temp_timesheet = Timesheet.find(params[:id])
+    rescue
+      flash[:error] = "No timesheet with this id exists"
+      redirect_to timesheets_path
+      return
+    end
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       @user = temp_timesheet.student
@@ -29,6 +35,9 @@ class TimesheetsController < ApplicationController
       @timesheet = temp_timesheet
       @student= temp_timesheet.student
       @title = "Process Timesheet"
+    elsif (@user.type == 'Student')
+      flash[:error] = "You do not have permission to view that timesheet"
+      redirect_to timesheets_path
     end
     
   end
