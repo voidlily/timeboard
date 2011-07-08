@@ -14,7 +14,11 @@ class PagesController < ApplicationController
     end
     if user.type == "Student"
       #TODO make this go to current timesheet.
-      redirect_to timesheets_path(:status => "Drafts")
+      if (user.current_timesheet == nil)
+	redirect_to timesheets_path(:status => "Drafts")
+      else
+	redirect_to user.current_timesheet
+      end
     elsif user.type == "Professor"
       redirect_to timesheets_path(:status => "Signed")
     elsif user.type == "Finance"
