@@ -25,7 +25,12 @@ class TimesheetsController < ApplicationController
       @timesheet = temp_timesheet
       @student = temp_timesheet.student
       @title = "Approve Timesheet"
+    elsif (@user.type == 'Finance')
+      @timesheet = temp_timesheet
+      @student= temp_timesheet.student
+      @title = "Process Timesheet"
     end
+    
   end
 
   def new
@@ -45,7 +50,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
-    if params[:commit] == "Sign" || params[:commit] == "Approve"
+    if params[:commit] == "Sign" || params[:commit] == "Approve" || params[:commit] == "Process"
       sign
       return
     end
@@ -103,6 +108,11 @@ class TimesheetsController < ApplicationController
     elsif student.type == "Student"
       @timesheet.sign!
       flash[:notice] = "Timesheet has been signed."
+    elsif student.type == "Finance"
+      @timesheet.process!
+      flash[:notice] = "Timesheet has been processed"
+      redirect_to timesheets_path(:status => "Approved")
+      return
     end
     redirect_to @timesheet
     

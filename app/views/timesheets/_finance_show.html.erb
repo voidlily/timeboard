@@ -1,0 +1,62 @@
+<style type="text/css">
+    input[type="text"] {
+	width: 40px;
+    }
+    input[type="submit"] {
+	width: 80px;
+    }
+    h3 {
+	text-align: center;
+    }
+    #timesheet {
+	width: 500px;
+    }
+    th {
+	text-align: left;
+    }
+    #buttonPanel {
+	text-align: center;	
+    }
+</style>
+<div id="timesheet">
+    <h3>
+	<%= @student.name %> <br />
+    </h3>
+    <%= form_for(@timesheet, :url => { :controller => "timesheets", :action => "update" }) do |form| %>
+    <table width="100%">
+	<tr>
+	    <th />
+	    <th> Thur </th>
+	    <th> Fri </th>
+	    <th> Sat </th>
+	    <th> Sun </th>
+	    <th> Mon </th>
+	    <th> Tues </th>
+	    <th> Wed </th>
+	</tr>
+	<tr>
+	    <td> <%= @timesheet.start_date.to_s(:rfc822) %> - <%= (@timesheet.start_date + 6.days).to_s(:rfc822) %> </td>
+	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[0,7].each do |entry| %>
+		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
+		    <td><%= fields.text_field :hours , :disabled => true %></td>
+		    <%= fields.hidden_field :date %>
+		<% end %>
+	    <% end %> 
+	</tr>
+	<tr>
+	    <td> <%= (@timesheet.end_date - 6.days).to_s(:rfc822) %> - <%= @timesheet.end_date.to_s(:rfc822) %> </td>
+	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[7,14].each do |entry| %>
+		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
+		    <td><%= fields.text_field :hours, :disabled => true %></td>
+		    <%= fields.hidden_field :date %>
+		<% end %>
+	    <% end %> 
+	</tr>
+    <table>
+    <div id="buttonPanel">
+	<% if @timesheet.status == "Approved" %>
+	  <%= submit_tag "Process" %>
+	<% end %>
+    </div>
+    <% end %>
+</div>

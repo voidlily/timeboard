@@ -15,5 +15,10 @@
 #
 
 class Finance < User
+
+  def timesheets
+    return Timesheet.all
+  end
+
 end
 
