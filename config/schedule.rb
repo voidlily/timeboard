@@ -18,10 +18,9 @@
 # end
 
 set :environment, :development
-set :output, '/home/andrew/seniordesign/timeboard/timeboard/whenever.log'
+set :output, '../log/whenever.log'
 
-#every :thursday, :at => "00:05" do
-every 1.minute do
+every :thursday, :at => "00:05" do
   runner "AddAndOutdateTimesheets.process"
 end
 
