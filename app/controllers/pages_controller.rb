@@ -6,7 +6,27 @@ class PagesController < ApplicationController
   end
 
   def login
-    redirect_to root_path
+    #Redirects users to appropriate paths
+    user = User.find_by_account(session[:cas_user])
+    if (user.nil?)
+      redirect_to root_path
+      return
+    else
+      if user.type == "Student"
+        #TODO make this go to current timesheet.
+        if (user.current_timesheet == nil)
+          redirect_to timesheets_path(:status => "Drafts")
+        else
+	  redirect_to user.current_timesheet
+        end
+      elsif user.type == "Professor"
+        redirect_to timesheets_path(:status => "Signed")
+      elsif user.type == "Finance"
+        redirect_to timesheets_path(:status => "Approved")
+      else
+        redirect_to root_path
+      end
+    end
   end
 
   def logout

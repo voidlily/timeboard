@@ -4,7 +4,7 @@
   elsif(@user.type == "Professor")
     render 'timesheets/prof_show'
   elsif(@user.type == "Finance")
-    render 'pages/home'
+    render 'timesheets/finance_show'
   else
     render 'pages/home'
   end

@@ -17,5 +17,19 @@
 class Student < User
   has_many :timesheets, :dependent => :destroy
   belongs_to :course
+  
+  #
+  # This will figure out which timesheet is the most
+  # current one, based on the end_date of the timesheet
+  # and the current due date.
+  #
+  def current_timesheet
+    self.timesheets.select { |ts| ts.status == "Draft" }.each do |ts|
+      if ts.end_date == DueDate.date
+	return ts
+      end
+    end
+    return nil
+  end
 end
 

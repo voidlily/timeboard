@@ -20,7 +20,7 @@
 </style>
 <div id="timesheet">
     <h3>
-	<%= @user.name %> <br />
+	<%= @student.name %> <br />
     </h3>
     <%= form_for(@timesheet, :url => { :controller => "timesheets", :action => "update" }) do |form| %>
     <table width="100%">
@@ -54,8 +54,8 @@
 	</tr>
     <table>
     <div id="buttonPanel">
-	<% if @timesheet.status == "Signed" %>
-	  <%= submit_tag "Approve", :confirm => "I do hereby certify that the hours shown on the above time report are true and correct to the best of my knowledge and belief." %>
+	<% if @timesheet.status == "Approved" %>
+	  <%= submit_tag "Process" %>
 	<% end %>
     </div>
     <% end %>

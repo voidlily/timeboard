@@ -16,7 +16,13 @@ class TimesheetsController < ApplicationController
   def show
     #TODO probably vulnerable to direct reference
     @user = User.find_by_account(session[:cas_user])
-    temp_timesheet = Timesheet.find(params[:id])
+    begin
+      temp_timesheet = Timesheet.find(params[:id])
+    rescue
+      flash[:error] = "No timesheet with this id exists"
+      redirect_to timesheets_path
+      return
+    end
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       @user = temp_timesheet.student
@@ -25,7 +31,20 @@ class TimesheetsController < ApplicationController
       @timesheet = temp_timesheet
       @student = temp_timesheet.student
       @title = "Approve Timesheet"
+      if @user.students.index(@student).nil?
+	flash[:error] = "You cannot view this timesheet"
+	redirect_to timesheets_path
+	return
+      end
+    elsif (@user.type == 'Finance')
+      @timesheet = temp_timesheet
+      @student= temp_timesheet.student
+      @title = "Process Timesheet"
+    elsif (@user.type == 'Student')
+      flash[:error] = "You do not have permission to view that timesheet"
+      redirect_to timesheets_path
     end
+    
   end
 
   def new
@@ -45,7 +64,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
-    if params[:commit] == "Sign" || params[:commit] == "Approve"
+    if params[:commit] == "Sign" || params[:commit] == "Approve" || params[:commit] == "Process"
       sign
       return
     end
@@ -70,6 +89,7 @@ class TimesheetsController < ApplicationController
 	end
       end
       if (bol)
+	flash[:notice] = "Timesheet was successfully saved"
 	redirect_to @timesheet
       else
 	redirect_to @timesheet
@@ -102,6 +122,11 @@ class TimesheetsController < ApplicationController
     elsif student.type == "Student"
       @timesheet.sign!
       flash[:notice] = "Timesheet has been signed."
+    elsif student.type == "Finance"
+      @timesheet.process!
+      flash[:notice] = "Timesheet has been processed"
+      redirect_to timesheets_path(:status => "Approved")
+      return
     end
     redirect_to @timesheet
     
