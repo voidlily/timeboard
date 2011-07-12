@@ -56,6 +56,9 @@ GEM
       execjs
     coffee-script-source (1.1.1)
     diff-lcs (1.1.2)
+    email_spec (1.2.1)
+      mail (~> 2.2)
+      rspec (~> 2.0)
     email_validation (1.1.0)
       localized_each_validator (>= 1.0.1)
     erubis (2.7.0)
@@ -156,6 +159,7 @@ PLATFORMS
 DEPENDENCIES
   annotate!
   coffee-script
+  email_spec
   email_validation
   factory_girl_rails (~> 1.0.1)
   holidays

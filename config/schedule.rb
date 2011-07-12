@@ -25,4 +25,8 @@ every 1.minute do
   runner "AddAndOutdateTimesheets.process"
 end
 
+every :wednesday, :at => "12:00" do
+  runner "SendReminderEmail.process"
+end
+
 # Learn more: http://github.com/javan/whenever
