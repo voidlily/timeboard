@@ -20,7 +20,7 @@
 </style>
 <div id="timesheet">
     <h3>
-	<%= @user.name %> <br />
+	<%= @timesheet.student.name %> <br />
     </h3>
     <%= form_for(@timesheet, :url => { :controller => "timesheets", :action => "update" }) do |form| %>
     <table width="100%">

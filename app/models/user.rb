@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :account, :email
 
+  scope :active, where("active = ?", true)
+
   validates :name, :presence => true
   validates :account, :presence => true,
                       :uniqueness => { :case_sensitive => false }
