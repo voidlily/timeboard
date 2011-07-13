@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701232720) do
+ActiveRecord::Schema.define(:version => 20110713172217) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20110701232720) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+    t.boolean  "active"
   end
 
   add_index "users", ["account"], :name => "index_users_on_prism", :unique => true
