@@ -5,16 +5,27 @@ class TimesheetsController < ApplicationController
   def index
     @title = "Timesheets"
     @user = User.find_by_account(session[:cas_user])
+    # Here we will generate a proper listing that should be default per user.  
+    # For students, this goes to all drafts or disapproved timesheets
+    # For professors, this goes to all signed timesheets
+    # For finance, this goes to approved timesheets.
     @timesheet_list = @user.timesheets
-    @requested_status = params[:status].nil? ? "Signed" : params[:status]
-    @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
-    #TODO define current_user
-    #blocked by cas implementation for sessions controller
-    #@timesheets = current_user.timesheets
+    if @user.type == 'Student'
+      if params[:status].nil?
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
+      else
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      end
+    elsif @user.type == 'Professor'
+      @requested_status = params[:status].nil? ? "Signed" : params[:status]
+      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+    elsif @user.type == 'Finance'
+      @requested_status = params[:status].nil? ? "Approved" : params[:status]
+      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+    end
   end
 
   def show
-    #TODO probably vulnerable to direct reference
     @user = User.find_by_account(session[:cas_user])
     begin
       temp_timesheet = Timesheet.find(params[:id])
