@@ -1,0 +1,27 @@
+<%=form_for @user do |user|%>
+ <%= user.label :name %>:
+ <%= user.text_field :name %><br />
+
+ <%= user.label :account %>:
+ <%= user.text_field :account %><br />
+
+ <%= user.label :email %>:
+ <%= user.text_field :email %><br />
+
+ <%= user.label :employee_id %>:
+ <%= user.text_field :employee_id %><br />
+
+ <%= user.label :admin %>:
+ <%= user.text_field :admin %><br />
+
+ <%= user.label :type %>:
+ <%= user.text_field :type %><br />
+
+ <%= user.label :course_id %>:
+ <%= user.text_field :course_id %><br />
+
+ <%= user.label :active %>:
+ <%= user.text_field :active %><br />
+
+ <%= user.submit %>
+<%end%>
