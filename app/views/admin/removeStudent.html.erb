@@ -16,11 +16,14 @@
 <h1>No Users</hi>
 <% else %>
 <h1>Users</h1>
-<%= form_tag({:controller => :admin, :action => :delete_user}, :method => :put ) do %>
+<%= form_tag do %>
 <div id="prof-timesheet-list">
   <table class="listview">
     <thead>
       <tr>
+	<th>
+	  ID
+	</th>
         <th>
           Name
         </th>           
@@ -35,15 +38,17 @@
 	</th>           
 	<th>
           Remove User
-          
-	  <input type="checkbox" name="select-all" id="select-all" />
         </th>
         <% end %>           
       </tr>
     </thead>
     <tbody>
       <% @user_list.each do |user| %>
+	<% if user.active==true %>	
       <tr>
+	<td>
+	  <%= user.id %>
+	</td>
         <td>
           <%= user.name %>
         </td>
@@ -57,17 +62,15 @@
 	  <%= user.employee_id %> 
 	</td>
         <td>
-          <%= check_box_tag user.id, "Remove" %>
+          <li>
+	    <%= button_to "Inactivate User",{:controller => :admin, :action =>:delete_user, :id=> user.id}, :confirm => "Are you certain that you wish to remove these users? Their records will remain in the system, but neither they nor their timesheets will be shown." %>
+	  </li>
         </td>
         <% end %>
       </tr>
+       <%end%>	
       <% end %>
     </tbody>
   </table>
 </div>
-<div class="submit-button">
-  <%= submit_tag "Remove", :confirm => "Are you certain that you wish to remove these users? Their records will remain in the system, but neither they nor their timesheets will be shown." %>
-</div>
 
-
-<%= button_to "Delete", {:controller => "admin", :action => 'delete_user', :id => 2} %>

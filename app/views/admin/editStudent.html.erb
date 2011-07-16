@@ -1,1 +1,76 @@
-<p>Squeak for student editing</p>
+<script text="text/javascript"> 
+  $(document).ready(function(){$('#select-all').click(function(event) {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    } else {
+      $(':checkbox').each(function() {
+        this.checked = false;
+      });
+    }
+  });
+  });
+</script>
+<% if(@user_list.empty?) %>
+<h1>No Users</hi>
+<% else %>
+<h1>Users</h1>
+<%= form_tag do %>
+<div id="prof-timesheet-list">
+  <table class="listview">
+    <thead>
+      <tr>
+	<th>
+	  ID
+	</th>
+        <th>
+          Name
+        </th>           
+        <th>
+          Prism ID
+        </th>           
+        <th>
+          Account Type
+        </th>
+	<th>
+	  Employee ID
+	</th>           
+	<th>
+          Remove User
+        </th>
+        <% end %>           
+      </tr>
+    </thead>
+    <tbody>
+      <% @user_list.each do |user| %>
+	<% if user.active==true %>	
+      <tr>
+	<td>
+	  <%= user.id %>
+	</td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.account %>
+        </td>
+        <td>
+          <%= user.type%>
+        </td>
+	<td>
+	  <%= user.employee_id %> 
+	</td>
+        <td>
+          <li>
+	    <%= link_to "Edit User",:controller => :users, :action =>:edit, :id=> user.id %>
+	  </li>
+        </td>
+        <% end %>
+      </tr>
+       <%end%>	
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

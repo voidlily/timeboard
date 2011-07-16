@@ -22,6 +22,29 @@ class CoursesController < ApplicationController
 
   end
 
+  def create
+    @course = Course.new(params[:course])
+    respond_to do |format|
+      if @course.save
+	format.html {redirect_to 'admin/index', :notice=>"Course created."}
+      end
+    end
+  end
+
+  def edit
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+ 
+    respond_to do |format|
+      if @course.update_attributes(params[:course])
+        format.html {render 'editCourse', :notice=>"Course edited."}
+      end
+    end
+  end
+
 private
 
   def check_for_user_in_db

@@ -15,6 +15,7 @@
 #
 
 class Professor < User
+  attr_accessible :name, :account, :email, :employee_id, :admin, :type, :course_id, :active
   has_many :courses
   has_many :students, :through => :courses
   has_many :timesheets, :through => :students

@@ -3,7 +3,8 @@
 
 <%if(@user.type == "Student")%>
 <h2>
-  <%= link_to @user.course.name, :controller => :courses, :action => :show, :id => @user.course.id%>
+  <% @course=Course.find(@user.course_id) %>
+  <%= link_to @course.name, :controller => :courses, :action => :show, :id => @user.course_id%>
 </h2>
 <%elsif(@user.type == "Professor")%>
   <h2>Courses</h2>

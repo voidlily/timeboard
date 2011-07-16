@@ -16,7 +16,7 @@
 
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :account, :email
+  attr_accessible :name, :account, :email, :employee_id, :admin, :type, :course_id, :active
 
   validates :name, :presence => true
   validates :account, :presence => true,
@@ -24,5 +24,17 @@ class User < ActiveRecord::Base
   validates :email, :presence => true,
                     :email => true,
                     :uniqueness => { :case_sensitive => false }
+#return an array [User, User, ...], instead of [Admin, Director, Director, Instructor, ...]
+    def self.all_without_typecast
+      self.all.collect! do |u|
+          u.becomes(User)
+      end
+    end
+
+    #makes subclasses of User (Admin, Director, ...) into User class
+    def userize #cast_into_user could be a better name
+      self.becomes(User)
+    end
+
 end
 

@@ -41,6 +41,7 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'email_spec'
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'factory_girl_rails', '~> 1.0.1'

@@ -1,1 +1,10 @@
-<p>Squeak for course addition</p>
+
+<%= form_for @course do |course|%>
+ <%= course.label :name %>:
+ <%= course.text_field :name %><br />
+
+ <%= course.label :professor_id %>:
+ <%= course.text_field :professor_id %><br />
+
+ <%= course.submit %>
+<%end%>

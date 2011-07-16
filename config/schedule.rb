@@ -18,11 +18,14 @@
 # end
 
 set :environment, :development
-set :output, '/home/andrew/seniordesign/timeboard/timeboard/whenever.log'
+set :output, '../log/whenever.log'
 
 every :thursday, :at => "00:05" do
-#every 1.minute do
   runner "AddAndOutdateTimesheets.process"
+end
+
+every :wednesday, :at => "12:00" do
+  runner "SendReminderEmail.process"
 end
 
 # Learn more: http://github.com/javan/whenever

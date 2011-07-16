@@ -3,6 +3,11 @@
     <span>Timesheets</span>
   </li>
   <% if @user != nil  %>
+    <% if@user.admin %>
+      <li>
+	<%= link_to "Admin", '/admin/index', :class=> "toollink"%>
+      </li>
+    <%end%>
     <% if @user.type == 'Student'  %>
       <li>
         <%= link_to "Current", @user.current_timesheet, :class => "toollink"%>
