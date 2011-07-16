@@ -21,7 +21,11 @@
     </thead>
     <tbody>
       <% @timesheet_list.each do |timesheet| %>
-      <tr>
+      <% if timesheet.status == "Disapproved" %>
+        <tr style="background-color: yellow">
+      <% else %>
+        <tr>
+      <% end %>
         <td>
           <%= timesheet.student.name %>
         </td>

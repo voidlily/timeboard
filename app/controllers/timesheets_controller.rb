@@ -38,6 +38,9 @@ class TimesheetsController < ApplicationController
       @timesheet = temp_timesheet
       @user = temp_timesheet.student
       @title = "Edit Timesheet"
+      if @timesheet.status == "Disapproved"
+	flash[:notice] = 'Reopen Reason: ' + @timesheet.reopen_reason
+      end
     elsif (@user.type == 'Professor')
       @timesheet = temp_timesheet
       @student = temp_timesheet.student
