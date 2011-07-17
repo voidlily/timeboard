@@ -84,6 +84,10 @@ class TimesheetsController < ApplicationController
     end
     @user = User.find_by_account(session[:cas_user])
     temp_timesheet = Timesheet.find(params[:id])
+    if params[:commit] == "Disapprove" && @user.type == "Professor"
+      disapprove(params)
+      return
+    end
     if(User.find_by_account(session[:cas_user]).type == "Professor")
       approve
     end
@@ -143,6 +147,18 @@ class TimesheetsController < ApplicationController
       return
     end
     redirect_to @timesheet
+    
+  end
+
+  def disapprove(params)
+    if params[:timesheet][:reopen_reason] == ""
+      flash[:error] = "You must add a comment in order to disapprove"
+      redirect_to Timesheet.find(params[:id])
+      return
+    end
+    ts = Timesheet.find(params[:id])
+    ts.reopen(params[:timesheet][:reopen_reason])
+    redirect_to timesheets_path(:status => "Signed")
     
   end
 
