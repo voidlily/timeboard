@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110716194156) do
+ActiveRecord::Schema.define(:version => 20110717230133) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20110716194156) do
   end
 
   add_index "courses", ["name"], :name => "index_courses_on_course_number", :unique => true
-  add_index "courses", ["professor_id"], :name => "index_courses_on_professor_id"
+  add_index "courses", ["professor_id"], :name => "index_courses_on_professor_id", :unique => true
 
   create_table "due_dates", :force => true do |t|
     t.date     "date"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20110716194156) do
   create_table "timesheet_entries", :force => true do |t|
     t.integer  "timesheet_id"
     t.date     "date"
-    t.decimal  "hours",        :default => 0.0, :null => false
+    t.decimal  "hours",        :precision => 10, :scale => 0, :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20110716194156) do
     t.datetime "updated_at"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "reopen_reason"
   end
 
   add_index "timesheets", ["student_id"], :name => "index_timesheets_on_student_id"
@@ -79,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20110716194156) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
-    t.boolean  "active"
+    t.boolean  "active",      :default => true, :null => false
   end
 
   add_index "users", ["account"], :name => "index_users_on_prism", :unique => true
