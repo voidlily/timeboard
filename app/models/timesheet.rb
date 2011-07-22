@@ -2,12 +2,13 @@
 #
 # Table name: timesheets
 #
-#  id         :integer         not null, primary key
-#  student_id :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  start_date :date
-#  end_date   :date
+#  id            :integer         not null, primary key
+#  student_id    :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  start_date    :date
+#  end_date      :date
+#  reopen_reason :string
 #
 
 class Timesheet < ActiveRecord::Base
@@ -58,6 +59,12 @@ class Timesheet < ActiveRecord::Base
 
   def approve!
     self.timesheet_statuses.create(:status => "Approved")
+  end
+
+  def reopen(reason)
+    self.timesheet_statuses.create(:status => "Disapproved")
+    self.reopen_reason = reason
+    self.save
   end
 
   def process!

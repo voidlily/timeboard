@@ -11,7 +11,7 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :name
-
+  attr_accessible :professor_id
   belongs_to :professor
   has_many :students
   validates :name, :presence => true

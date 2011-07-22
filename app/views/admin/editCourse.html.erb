@@ -1,0 +1,62 @@
+<script text="text/javascript"> 
+  $(document).ready(function(){$('#select-all').click(function(event) {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    } else {
+      $(':checkbox').each(function() {
+        this.checked = false;
+      });
+    }
+  });
+  });
+</script>
+<% if(@course_list.empty?) %>
+<h1>No Courses Exist</hi>
+<% else %>
+<h1>Users</h1>
+<%= form_tag do %>
+<div id="prof-timesheet-list">
+  <table class="listview">
+    <thead>
+      <tr>
+	<th>
+	  ID
+	</th>
+        <th>
+          Course Name
+        </th>           
+        <th>
+         Professor
+        </th>                    
+	<th>
+          Remove User
+        </th>
+        <% end %>           
+      </tr>
+    </thead>
+    <tbody>
+      <% @course_list.each do |course| %>	
+      <tr>
+	<td>
+	  <%= course.id %>
+	</td>
+        <td>
+          <%= course.name %>
+        </td>
+        <td>
+          <% @courseprof= User.find(course.professor_id)%>
+          <%= @courseprof.name %>
+        </td>
+        <td>
+          <li>
+	    <%= link_to "Edit Course",:controller => :courses, :action =>:edit, :id=> course.id %>
+	  </li>
+        </td>
+      </tr>
+       <%end%>	
+      <% end %>
+    </tbody>
+  </table>
+</div>

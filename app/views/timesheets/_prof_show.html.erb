@@ -17,10 +17,17 @@
     #buttonPanel {
 	text-align: center;	
     }
+    .text_area {
+	height: 100px;
+	width: 375px;
+    }
+    .reopen_label {
+	vertical-align: top;
+    }
 </style>
 <div id="timesheet">
     <h3>
-	<%= @timesheet.student.name %> <br />
+	<%= @student.name %> <br />
     </h3>
     <%= form_for(@timesheet, :url => { :controller => "timesheets", :action => "update" }) do |form| %>
     <table width="100%">
@@ -53,9 +60,12 @@
 	    <% end %> 
 	</tr>
     <table>
+    <%= form.label :reopen_reason, "Comments: ", :class => "reopen_label" %>
+    <%= form.text_area :reopen_reason, :class => "text_area", :disabled => @timesheet.status != "Signed" %>
     <div id="buttonPanel">
 	<% if @timesheet.status == "Signed" %>
 	  <%= submit_tag "Approve", :confirm => "I do hereby certify that the hours shown on the above time report are true and correct to the best of my knowledge and belief." %>
+	  <%= submit_tag "Disapprove" %>
 	<% end %>
     </div>
     <% end %>

@@ -17,7 +17,7 @@
 class Student < User
   has_many :timesheets, :dependent => :destroy
   belongs_to :course
-  
+ attr_accessible :name, :account, :email, :employee_id, :admin, :type, :course_id, :active
   #
   # This will figure out which timesheet is the most
   # current one, based on the end_date of the timesheet

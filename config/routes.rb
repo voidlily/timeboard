@@ -4,7 +4,9 @@ Timeboard::Application.routes.draw do
 
   resources :courses
   resources :users
- 
+  resources :professors
+  resources :students 
+
   resources :timesheets do
     member do
       put :sign, :approve, :process
@@ -15,7 +17,14 @@ Timeboard::Application.routes.draw do
   match '/professor/list',	:to => 'professors#timesheet_list'
   match '/login',		:to => 'pages#login'
   match '/logout',		:to => 'pages#logout'
-  
+  match '/admin/index',		:to => 'admin#index'
+  match '/admin/addStudent',	:to => 'admin#addStudent'
+  match '/admin/removeStudent', :to => 'admin#removeStudent'
+  match '/admin/editStudent',	:to => 'admin#editStudent'
+  match '/admin/addCourse',	:to => 'admin#addCourse'
+  match '/admin/removeCourse',	:to => 'admin#removeCourse'
+  match '/admin/editCourse',	:to => 'admin#editCourse'
+
   root :to => 'pages#home'
 
   get "pages/home"
@@ -76,5 +85,5 @@ Timeboard::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+   match ':controller(/:action(/:id(.:format)))'
 end

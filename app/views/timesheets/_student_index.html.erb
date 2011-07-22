@@ -1,7 +1,11 @@
 
 <p>Welcome <%= @user.name%> </p>
 <% if(@timesheet_list.empty?) %>
-<h1>No <%= @requested_status.downcase%> timesheets</hi>
+  <% if @requested_status != nil %>
+    <h1>No <%= @requested_status.downcase%> timesheets</hi>
+  <% else %>
+    <h1>No timesheets </h1>
+  <% end %>
 <% else %>
 <h1><%= @requested_status %> timesheets</h1>
 <div id="student-timesheet-list">
@@ -21,7 +25,11 @@
     </thead>
     <tbody>
       <% @timesheet_list.each do |timesheet| %>
-      <tr>
+      <% if timesheet.status == "Disapproved" %>
+        <tr style="background-color: yellow">
+      <% else %>
+        <tr>
+      <% end %>
         <td>
           <%= timesheet.student.name %>
         </td>
