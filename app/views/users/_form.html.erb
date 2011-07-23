@@ -16,7 +16,7 @@ TA Employee ID or GT Faculty ID<br />
 
  <%= user.label :admin %>:
  <%= user.check_box :admin %><br />
-Designates if the user has admin privileges. This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is also acceptable. <br />
+Designates if the user has admin privileges.<br />
 
  <%= user.label :type %>:
  <%= user.select :type, [["Student","Student"],["Professor","Professor"],["Finance","Finance"]] %><br />
@@ -28,7 +28,7 @@ The user's assigned course. If the user is a professor, they will own this cours
 
  <%= user.label :active %>:
  <%= user.check_box :active %><br />
-Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section). This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is acceptable as well.<br />
+Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section).<br />
  <%= user.submit %>
 <br />
 <%end%>
