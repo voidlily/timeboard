@@ -8,6 +8,24 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     end
   end
 
+  # Purely for testing purposes, to be used unless this code is better than add_new_timesheets
+  def self.add_new_timesheets_with_date(date)
+    students = Student.active
+    students.each do |student|
+      ts = student.timesheets.create
+      ts.start_date = date
+      ts.end_date = ts.start_date + 13.days
+      if (ts.save)
+	(0..13).each do |i|
+	  entry = ts.timesheet_entries.create
+	  entry.date = ts.start_date + i.days
+	  entry.hours = 0
+	  entry.save
+	end
+      end
+    end
+  end
+
   def self.add_new_timesheets
     students = Student.active # eventually change to some kind of active scope (for inactive students)
     students.each do |student|

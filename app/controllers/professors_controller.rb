@@ -1,7 +1,7 @@
 class ProfessorsController < UsersController
   before_filter RubyCAS::Filter
   before_filter :check_for_user_in_db
-
+  before_filter :get_current_user
 
 def timesheet_list
 end
@@ -28,5 +28,9 @@ def check_for_user_in_db
     redirect_to root_path
   end
 end
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
+  end
 
 end

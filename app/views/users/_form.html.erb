@@ -15,20 +15,20 @@ User's Prism ID<br />
 TA Employee ID or GT Faculty ID<br />
 
  <%= user.label :admin %>:
- <%= user.text_field :admin %><br />
-Designates if the user has admin privileges. This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is also acceptable. <br />
+ <%= user.check_box :admin %><br />
+Designates if the user has admin privileges.<br />
 
  <%= user.label :type %>:
- <%= user.text_field :type %><br />
-Designates what the user's type is. Acceptable values are (again, without quotes) "Student", "Professor", "Finance", or null (typically if it is to be an admin-only account).<br />
+ <%= user.select :type, [["Student","Student"],["Professor","Professor"],["Finance","Finance"]] %><br />
+Designates what the user's type is.<br />
 
  <%= user.label :course_id %>:
- <%= user.text_field :course_id %><br />
-The user's assigned course. If the user is a professor, they will own this course. If it is a student, they will be assigned to work under this course. This integer ID is unique to the course, and can easily be found in the "Remove Course" or "Edit Course" views of the Admin section.<br /
+ <%= user.select :course_id, Course.all.collect {|c| [ c.name, c.id ] }%><br />
+The user's assigned course. If the user is a professor, they will own this course. If it is a student, they will be assigned to work under this course.<br /
 
  <%= user.label :active %>:
- <%= user.text_field :active %><br />
-Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section). This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is acceptable as well.<br />
+ <%= user.check_box :active %><br />
+Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section).<br />
  <%= user.submit %>
 <br />
 <%end%>

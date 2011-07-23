@@ -1,6 +1,7 @@
 class TimesheetsController < ApplicationController
   before_filter RubyCAS::Filter
   before_filter :check_for_user_in_db
+  before_filter :get_current_user
 
   def index
     @title = "Timesheets"
@@ -11,17 +12,26 @@ class TimesheetsController < ApplicationController
     # For finance, this goes to approved timesheets.
     @timesheet_list = @user.timesheets
     if @user.type == 'Student'
-      if params[:status].nil?
+      if params[:status].nil? || params[:status] == "Open"
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
       else
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
       end
     elsif @user.type == 'Professor'
       @requested_status = params[:status].nil? ? "Signed" : params[:status]
-      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      if @requested_status == "Open"
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
+      else  
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      end
     elsif @user.type == 'Finance'
       @requested_status = params[:status].nil? ? "Approved" : params[:status]
-      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      if @requested_status == "Open"
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
+      else  
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      end
+
     end
   end
 
@@ -90,6 +100,7 @@ class TimesheetsController < ApplicationController
     end
     if(User.find_by_account(session[:cas_user]).type == "Professor")
       approve
+      return
     end
     bol = true
     if (temp_timesheet.student.account == session[:cas_user])
@@ -128,6 +139,7 @@ class TimesheetsController < ApplicationController
         timesheet.approve!
       end
     end
+    flash[:notice] = "Timesheets approved."
     redirect_to timesheets_path
   end
 
@@ -168,4 +180,9 @@ class TimesheetsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
+  end
+
 end
