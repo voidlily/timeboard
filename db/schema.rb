@@ -37,14 +37,6 @@ ActiveRecord::Schema.define(:version => 20110717230133) do
 
   add_index "holidays", ["date"], :name => "index_holidays_on_date", :unique => true
 
-  create_table "monsters", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "hitpoints"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "timesheet_entries", :force => true do |t|
     t.integer  "timesheet_id"
     t.date     "date"
