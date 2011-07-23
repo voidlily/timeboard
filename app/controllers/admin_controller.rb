@@ -2,6 +2,7 @@ class AdminController < ApplicationController
   before_filter RubyCAS::Filter
   before_filter :check_for_user_in_db
   before_filter :index
+  before_filter :get_current_user
 
   def index
     @user = User.find_by_account(session[:cas_user])
@@ -35,6 +36,12 @@ class AdminController < ApplicationController
       flash[:error] = "User not found in Timeboard database."
       redirect_to root_path
     end
+  end
+
+private
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
   end
 
 

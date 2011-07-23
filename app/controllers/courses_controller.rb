@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController 
   before_filter RubyCAS::Filter
   before_filter :check_for_user_in_db
+  before_filter :get_current_user
+
 
   def index
     @user = User.find_by_account(session[:cas_user])
@@ -62,6 +64,10 @@ private
       flash[:error] = "User not found in Timeboard database."
       redirect_to root_path
     end
+  end
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
   end
 
 end

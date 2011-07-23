@@ -1,6 +1,7 @@
 class UsersController < ApplicationController 
   before_filter RubyCAS::Filter 
   before_filter :check_for_user_in_db 
+  before_filter :get_current_user
 
   def new
     @user = User.new
@@ -48,5 +49,10 @@ private
       redirect_to root_path
     end
   end
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
+  end
+
 
 end
