@@ -50,7 +50,7 @@
 	  <%= user.id %>
 	</td>
         <td>
-          <%= user.name %>
+          <%= link_to user.name, user_path(user.id) %>
         </td>
         <td>
           <%= user.account %>

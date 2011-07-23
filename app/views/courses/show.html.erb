@@ -1,6 +1,12 @@
 <h1><%= @course.name %></h1>
 
-<h3><%= link_to @course.professor.name, :controller => :users, :action => :show, :id => @course.professor.id%></h3>
+<h3><%if (User.find_by_id(@course.professor_id)).nil? %> Course has no assigned professor.
+
+<%else%>
+<%= link_to (User.find_by_id(@course.professor_id)).name, :controller => :users, :action => :show, :id => @course.professor_id%>
+
+<%end%>
+</h3>
 
 <h2>Students<h2>
 <ul id="course-student-list" style="list-style-type: none;">

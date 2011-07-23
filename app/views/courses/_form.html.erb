@@ -1,12 +1,12 @@
 <%=form_for @course do |f| %>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br />
 
-    <%= f.label :professor_id %><br />
-    <%= f.text_field :professor_id %>
-
-    <%= f.label :id %><br />
-    <%= f.text_field :id %>
+    <%= f.label :professor_id %>
+    <%= f.text_field :professor_id %><br />
+    Be careful editing the course ID. They are normally automatically assigned by the system, and they NEED TO BE UNIQUE. Take care not to change this to the same ID as another course. It should be fine if you change the ID to that of a previously deleted course, however. <br />
+    <%= f.label :id %>
+    <%= f.text_field :id %><br />
 
     <%= f.submit %>
 

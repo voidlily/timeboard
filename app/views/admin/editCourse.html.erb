@@ -31,7 +31,7 @@
          Professor
         </th>                    
 	<th>
-          Remove User
+          Edit Course
         </th>
         <% end %>           
       </tr>
@@ -43,11 +43,10 @@
 	  <%= course.id %>
 	</td>
         <td>
-          <%= course.name %>
+          <%= link_to course.name, course_path(course.id) %>
         </td>
         <td>
-          <% @courseprof= User.find(course.professor_id)%>
-          <%= @courseprof.name %>
+          <%if course.professor_id.nil?%> <%else%><% @courseprof= User.find(course.professor_id)%><%=@courseprof.name %><%end%>
         </td>
         <td>
           <li>
