@@ -39,7 +39,7 @@ module Timeboard
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.rubycas.cas_base_url = 'https://localhost:5678'
+    config.rubycas.cas_base_url = 'http://localhost:5678'
 
   end
 end

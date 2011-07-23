@@ -2,8 +2,21 @@ class UsersController < ApplicationController
   before_filter RubyCAS::Filter 
   before_filter :check_for_user_in_db 
 
-  def index
-    @user = User.find(params[:id])
+  def new
+    @user = User.new
+    @title = "User creation"
+  end
+
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:success] = "User successfully created."
+      redirect_to @user
+    else
+      flash[:error] = "One or more fields was not filled in or was not of the correct input format."
+      @title = "Sign up"
+      render 'new'
+    end
   end
 
   def show
@@ -12,15 +25,18 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @title = "Edit user"
   end
 
   def update
-    @user = User.new(params[:user])
-    @user = @user.userize
-    respond_to do |format|
-      if @user.save
-	format.html {render 'editStudent', :notice=>"User edited."}
-      end
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Profile updated."
+      redirect_to @user
+    else
+      flash[:error] = "Some input was either blank or of incorrect format."
+      @title = "Edit user"
+      render 'edit'
     end
   end
 

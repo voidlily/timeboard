@@ -1,27 +1,34 @@
-<%=form_for @user do |user|%>
+
+<%= form_for @user do |user|%>
+
  <%= user.label :name %>:
  <%= user.text_field :name %><br />
-
+User's actual full name (first/last or first/middle/last). <br />
  <%= user.label :account %>:
  <%= user.text_field :account %><br />
-
+User's Prism ID<br />
  <%= user.label :email %>:
  <%= user.text_field :email %><br />
 
  <%= user.label :employee_id %>:
  <%= user.text_field :employee_id %><br />
+TA Employee ID or GT Faculty ID<br />
 
  <%= user.label :admin %>:
  <%= user.text_field :admin %><br />
+Designates if the user has admin privileges. This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is also acceptable. <br />
 
  <%= user.label :type %>:
  <%= user.text_field :type %><br />
+Designates what the user's type is. Acceptable values are (again, without quotes) "Student", "Professor", "Finance", or null (typically if it is to be an admin-only account).<br />
 
  <%= user.label :course_id %>:
  <%= user.text_field :course_id %><br />
+The user's assigned course. If the user is a professor, they will own this course. If it is a student, they will be assigned to work under this course. This integer ID is unique to the course, and can easily be found in the "Remove Course" or "Edit Course" views of the Admin section.<br /
 
  <%= user.label :active %>:
  <%= user.text_field :active %><br />
-
+Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section). This is a BOOLEAN value. It MUST be either "true" or "false" (without quotes). Simply "t" or "f" is acceptable as well.<br />
  <%= user.submit %>
+<br />
 <%end%>

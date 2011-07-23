@@ -15,6 +15,10 @@ class CoursesController < ApplicationController
     end
   end
 
+  def new
+    @course = Course.new
+    @title = "Course creation"
+  end
 
   def show
     @user = User.find_by_account(session[:cas_user])
@@ -24,24 +28,30 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(params[:course])
-    respond_to do |format|
-      if @course.save
-	format.html {redirect_to 'admin/index', :notice=>"Course created."}
-      end
+    if @course.save
+      flash[:success] = "Course successfully created."
+      redirect_to @course
+    else
+      flash[:error] = "One or more fields was not filled in or was not of the correct input format."
+      @title = "Course creation"
+      render 'new'
     end
   end
 
   def edit
     @course = Course.find(params[:id])
+    @title = "Edit course"
   end
 
   def update
     @course = Course.find(params[:id])
- 
-    respond_to do |format|
-      if @course.update_attributes(params[:course])
-        format.html {render 'editCourse', :notice=>"Course edited."}
-      end
+    if @course.update_attributes(params[:course])
+      flash[:success] = "Course updated."
+      redirect_to @course
+    else
+      flash[:error] = "Some input was either blank or of incorrect format."
+      @title = "Edit course"
+      render 'edit'
     end
   end
 

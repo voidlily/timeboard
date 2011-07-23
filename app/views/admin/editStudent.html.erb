@@ -37,7 +37,7 @@
 	  Employee ID
 	</th>           
 	<th>
-          Remove User
+          Edit User
         </th>
         <% end %>           
       </tr>
@@ -50,7 +50,7 @@
 	  <%= user.id %>
 	</td>
         <td>
-          <%= user.name %>
+          <%= link_to user.name, user_path(user.id) %>
         </td>
         <td>
           <%= user.account %>
@@ -63,7 +63,7 @@
 	</td>
         <td>
           <li>
-	    <%= link_to "Edit User",:controller => :users, :action =>:edit, :id=> user.id %>
+	    <%= link_to "Edit User", edit_user_path(user.id) %>
 	  </li>
         </td>
         <% end %>

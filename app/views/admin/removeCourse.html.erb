@@ -31,7 +31,7 @@
          Professor
         </th>                    
 	<th>
-          Remove User
+          Remove Course
         </th>
         <% end %>           
       </tr>
@@ -43,7 +43,7 @@
 	  <%= course.id %>
 	</td>
         <td>
-          <%= course.name %>
+          <%= link_to course.name, course_path(course.id) %>
         </td>
         <td>
           <% @courseprof= User.find(course.professor_id)%>
