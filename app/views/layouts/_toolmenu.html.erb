@@ -12,10 +12,10 @@
       <li>
         <%= link_to "Current", @user.current_timesheet, :class => "toollink"%>
       </li>
-      <li>
-        <%= link_to "Drafts", timesheets_path(:status => "Draft"), :class => "toollink" %>
-      </li>
     <% end %>
+    <li>
+      <%= link_to "Open", timesheets_path(:status => "Open"), :class => "toollink" %>
+    </li>
     <li>
       <%= link_to "Signed", timesheets_path(:status => "Signed"), :class => "toollink" %>
     </li>

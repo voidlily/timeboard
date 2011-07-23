@@ -11,17 +11,26 @@ class TimesheetsController < ApplicationController
     # For finance, this goes to approved timesheets.
     @timesheet_list = @user.timesheets
     if @user.type == 'Student'
-      if params[:status].nil?
+      if params[:status].nil? || params[:status] == "Open"
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
       else
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
       end
     elsif @user.type == 'Professor'
       @requested_status = params[:status].nil? ? "Signed" : params[:status]
-      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      if @requested_status == "Open"
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
+      else  
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      end
     elsif @user.type == 'Finance'
       @requested_status = params[:status].nil? ? "Approved" : params[:status]
-      @timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      if @requested_status == "Open"
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
+      else  
+	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
+      end
+
     end
   end
 
