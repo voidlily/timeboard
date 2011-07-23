@@ -69,6 +69,9 @@ private
   end
   
   def require_admin_or_finance
+    if @current_user.nil?
+      get_current_user
+    end
     unless @current_user.admin? || @current_user.type == "Finance"
       flash[:error] = "You must be an administrator to access this section"
       redirect_to root_path # halts request cycle
