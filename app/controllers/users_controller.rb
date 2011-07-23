@@ -1,6 +1,9 @@
 class UsersController < ApplicationController 
   before_filter RubyCAS::Filter 
   before_filter :check_for_user_in_db 
+  before_filter :get_current_user
+  before_filter :require_admin, :only => [:new, :create, :edit, :update]
+
 
   def new
     @user = User.new
@@ -20,6 +23,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    unless @user.id == @current_user.id || @current_user.admin?
+      flash[:error] = "You must be an administrator to access this section"
+      redirect_to root_path
+    end
     @user = User.find(params[:id])
   end
 
@@ -46,6 +53,17 @@ private
     if(User.find_by_account(session[:cas_user]).nil?)
       flash[:error] = "User not found in Timeboard database."
       redirect_to root_path
+    end
+  end
+
+  def get_current_user
+    @current_user = User.find_by_account(session[:cas_user])
+  end
+
+  def require_admin
+    unless @current_user.admin?
+      flash[:error] = "You must be an administrator to access this section"
+      redirect_to root_path # halts request cycle
     end
   end
 
