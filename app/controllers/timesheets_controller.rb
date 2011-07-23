@@ -79,7 +79,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
-    if params[:commit] == "Sign" || params[:commit] == "Approve" || params[:commit] == "Process"
+    if params[:commit] == "Sign" || params[:commit] == "Process"
       sign
       return
     end
@@ -91,6 +91,7 @@ class TimesheetsController < ApplicationController
     end
     if(User.find_by_account(session[:cas_user]).type == "Professor")
       approve
+      return
     end
     bol = true
     if (temp_timesheet.student.account == session[:cas_user])
