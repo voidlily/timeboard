@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_filter RubyCAS::Filter
   before_filter :check_for_user_in_db
-  before_filter :index
+  before_filter :index   #why is this here?
   before_filter :get_current_user
 
   def index
@@ -31,6 +31,8 @@ class AdminController < ApplicationController
     flash[:notice] = "Course Deleted"
   end
 
+private
+
   def check_for_user_in_db
     if(User.find_by_account(session[:cas_user]).nil?)
       flash[:error] = "User not found in Timeboard database."
@@ -38,7 +40,6 @@ class AdminController < ApplicationController
     end
   end
 
-private
 
   def get_current_user
     @current_user = User.find_by_account(session[:cas_user])

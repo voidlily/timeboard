@@ -63,7 +63,7 @@
 	</td>
         <td>
           <li>
-	    <%= button_to "Inactivate User",{:controller => :admin, :action =>:delete_user, :id=> user.id}, :confirm => "Are you certain that you wish to remove these users? Their records will remain in the system, but neither they nor their timesheets will be shown." %>
+	    <%= button_to "Deactivate User",{:controller => :admin, :action =>:delete_user, :id=> user.id}, :confirm => "Are you certain that you wish to remove these users? Their records will remain in the system, but neither they nor their timesheets will be shown." %>
 	  </li>
         </td>
         <% end %>

@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_filter RubyCAS::Filter 
   before_filter :check_for_user_in_db 
   before_filter :get_current_user
+  before_filter :require_admin, :only => [:new, :create, :edit, :update]
+
 
   def new
     @user = User.new
@@ -54,5 +56,11 @@ private
     @current_user = User.find_by_account(session[:cas_user])
   end
 
+  def require_admin
+    unless @current_user.admin?
+      flash[:error] = "You must be an administrator in to access this section"
+      redirect_to root_path # halts request cycle
+    end
+  end
 
 end
