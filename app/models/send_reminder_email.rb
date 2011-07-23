@@ -7,7 +7,7 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
   end
 
   def self.send_reminder_emails
-    students = Student.all
+    students = Student.active
     students.each do |student|
       StudentMailer.reminder_email(student).deliver
     end
