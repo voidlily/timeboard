@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   before_filter :check_for_user_in_db
   before_filter :index   #why is this here?
   before_filter :get_current_user
+  before_filter :require_admin, :only => [:new, :create, :edit, :update]
 
   def index
     @user = User.find_by_account(session[:cas_user])
@@ -43,6 +44,13 @@ private
 
   def get_current_user
     @current_user = User.find_by_account(session[:cas_user])
+  end
+
+  def require_admin
+    unless @current_user.admin?
+      flash[:error] = "You must be an administrator to access this section"
+      redirect_to root_path # halts request cycle
+    end
   end
 
 

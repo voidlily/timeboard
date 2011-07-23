@@ -24,10 +24,6 @@ class CoursesController < ApplicationController
 
   def show
     @user = User.find_by_account(session[:cas_user])
-    unless @user.id == @current_user.id || @current_user.admin?
-      flash[:error] = "You must be an administrator in to access this section"
-      redirect_to root_path
-    end
     @course = Course.find(params[:id])    
 
   end
@@ -76,7 +72,7 @@ private
 
   def require_admin
     unless @current_user.admin?
-      flash[:error] = "You must be an administrator in to access this section"
+      flash[:error] = "You must be an administrator to access this section"
       redirect_to root_path # halts request cycle
     end
   end

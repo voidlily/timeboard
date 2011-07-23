@@ -23,6 +23,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    unless @user.id == @current_user.id || @current_user.admin?
+      flash[:error] = "You must be an administrator to access this section"
+      redirect_to root_path
+    end
     @user = User.find(params[:id])
   end
 
@@ -58,7 +62,7 @@ private
 
   def require_admin
     unless @current_user.admin?
-      flash[:error] = "You must be an administrator in to access this section"
+      flash[:error] = "You must be an administrator to access this section"
       redirect_to root_path # halts request cycle
     end
   end
