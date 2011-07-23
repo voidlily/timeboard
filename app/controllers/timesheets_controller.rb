@@ -88,7 +88,7 @@ class TimesheetsController < ApplicationController
 
   def update
     #TODO: depends on frontend
-    if params[:commit] == "Sign" || params[:commit] == "Process"
+    if params[:commit] == "Sign" || params[:commit] == "Approve" || params[:commit] == "Process"
       sign
       return
     end
@@ -139,6 +139,7 @@ class TimesheetsController < ApplicationController
         timesheet.approve!
       end
     end
+    flash[:notice] = "Timesheets approved."
     redirect_to timesheets_path
   end
 
