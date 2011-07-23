@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20110717230133) do
   end
 
   add_index "courses", ["name"], :name => "index_courses_on_course_number", :unique => true
-  add_index "courses", ["professor_id"], :name => "index_courses_on_professor_id", :unique => true
+  add_index "courses", ["professor_id"], :name => "index_courses_on_professor_id"
 
   create_table "due_dates", :force => true do |t|
     t.date     "date"
@@ -37,10 +37,18 @@ ActiveRecord::Schema.define(:version => 20110717230133) do
 
   add_index "holidays", ["date"], :name => "index_holidays_on_date", :unique => true
 
+  create_table "monsters", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "hitpoints"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "timesheet_entries", :force => true do |t|
     t.integer  "timesheet_id"
     t.date     "date"
-    t.decimal  "hours",        :precision => 10, :scale => 0, :default => 0, :null => false
+    t.decimal  "hours",        :default => 0.0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110717230133) do
     t.datetime "updated_at"
     t.date     "start_date"
     t.date     "end_date"
+    t.string   "reopen_reason"
   end
 
   add_index "timesheets", ["student_id"], :name => "index_timesheets_on_student_id"
