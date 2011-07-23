@@ -1,7 +1,8 @@
 <h1>Editing Course</h1>
 
-PLEASE NOTE: The "Professor" field in this form means the Professor ID, NOT The Professor name or account name. To change the professor assigned to this course, change the "Professor" field to the desired Professor's ID. Professor IDs can be easily found on the "Edit Student" or "Remove Student" pages in the Admin section. <br />
 <%=render 'form' %>
+
+<p>Course Id: <%= @course.id %> </p>
 
 <%=link_to 'Show', @course %>
 <%=link_to 'Back', '/admin/editCourse' %>

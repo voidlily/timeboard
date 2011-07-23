@@ -4,9 +4,6 @@
 
     <%= f.label :professor_id %>
     <%= f.select :professor_id, Professor.active.collect {|p| [ p.name, p.id ] } %><br />
-    Be careful editing the course ID. They are normally automatically assigned by the system, and they NEED TO BE UNIQUE. Take care not to change this to the same ID as another course. It should be fine if you change the ID to that of a previously deleted course, however. <br />
-    <%= f.label :id %>
-    <%= f.text_field :id %><br />
 
     <%= f.submit %>
 
