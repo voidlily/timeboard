@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   before_filter :check_for_user_in_db
   before_filter :index   #why is this here?
   before_filter :get_current_user
-  before_filter :require_admin, :only => [:new, :create, :edit, :update]
+  before_filter :require_admin, :only => [:new, :create, :edit, :update, :index]
 
   def index
     @user = User.find_by_account(session[:cas_user])
