@@ -18,5 +18,13 @@ class Admin::UsersController < ApplicationController
       student.update_attributes(:name => row[0], :email => row[1], :account => row[2], :course => course, :active => true)
       student.save
     end
+
+    flash[:notice] = "Successfully imported student CSV."
+
+    # redirect_to ???
+
+  rescue => exception
+    flash[:error] = "Error importing student CSV. (#{ERB::Util.h(exception.to_s)})"
+    # redirect_to ???
   end
 end
