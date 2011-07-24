@@ -1,0 +1,34 @@
+
+<%= form_for @user do |user|%>
+
+ <%= user.label :name %>:
+ <%= user.text_field :name %><br />
+User's actual full name (first/last or first/middle/last). <br />
+ <%= user.label :account %>:
+ <%= user.text_field :account %><br />
+User's Prism ID<br />
+ <%= user.label :email %>:
+ <%= user.text_field :email %><br />
+
+ <%= user.label :employee_id %>:
+ <%= user.text_field :employee_id %><br />
+TA Employee ID or GT Faculty ID<br />
+
+ <%= user.label :admin %>:
+ <%= user.check_box :admin %><br />
+Designates if the user has admin privileges.<br />
+
+ <%= user.label :type %>:
+ <%= user.select :type, [["Student","Student"],["Professor","Professor"],["Finance","Finance"]] %><br />
+Designates what the user's type is.<br />
+
+ <%= user.label :course_id %>:
+ <%= user.select :course_id, Course.all.collect {|c| [ c.name, c.id ] }%><br />
+The user's assigned course. If the user is a professor, they will own this course. If it is a student, they will be assigned to work under this course.<br /
+
+ <%= user.label :active %>:
+ <%= user.check_box :active %><br />
+Designates if the user is active or not. If they are inactive, then they will not show up in any of the system views (except "Edit User" in the admin section).<br />
+ <%= user.submit %>
+<br />
+<%end%>
