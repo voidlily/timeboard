@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'email_validation'
 gem 'holidays'
 gem 'whenever'
+gem 'fastercsv'
 
 gem 'rubycas-client'
 
