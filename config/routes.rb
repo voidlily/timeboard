@@ -6,6 +6,7 @@ Timeboard::Application.routes.draw do
   resources :users
   resources :professors
   resources :students 
+  resources :finances
 
   resources :timesheets do
     member do
