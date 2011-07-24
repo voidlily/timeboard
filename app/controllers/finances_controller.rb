@@ -6,8 +6,6 @@ class ProfessorsController < UsersController
 
 
 
-def timesheet_list
-end
 
   def show
     @user = User.find(params[:id])
@@ -17,19 +15,10 @@ end
     @user = User.find(params[:id])
   end
 
-#  def update
-#    @user = User.find(params[:id])
-#    @user = @user.userize
-#    respond_to do |format|
-#      if @user.update_attributes(params[:user])
-#	format.html {render 'editStudent', :notice=>"Professor edited."}
-#      end
-#    end
-#  end
   
   def update
-    @user = Professor.find(params[:id])
-    if @user.update_attributes(params[:professor])
+    @user = Finance.find(params[:id])
+    if @user.update_attributes(params[:finance])
       flash[:success] = "Profile updated."
       redirect_to @user
     else
