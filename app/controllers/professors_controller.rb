@@ -10,15 +10,28 @@ end
     @user = User.find(params[:id])
   end
 
+#  def update
+#    @user = User.find(params[:id])
+#    @user = @user.userize
+#    respond_to do |format|
+#      if @user.update_attributes(params[:user])
+#	format.html {render 'editStudent', :notice=>"Professor edited."}
+#      end
+#    end
+#  end
+  
   def update
-    @user = User.find(params[:id])
-    @user = @user.userize
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-	format.html {render 'editStudent', :notice=>"Professor edited."}
-      end
+    @user = Professor.find(params[:id])
+    if @user.update_attributes(params[:professor])
+      flash[:success] = "Profile updated."
+      redirect_to @user
+    else
+      flash[:error] = "Some input was either blank or of incorrect format."
+      @title = "Edit user"
+      render 'edit'
     end
   end
+
 
 private
 
