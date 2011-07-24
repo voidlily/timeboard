@@ -1,4 +1,14 @@
 class Admin::UsersController < ApplicationController
+  before_filter RubyCAS::Filter
+  before_filter :require_admin
+
+  def require_admin
+    unless @current_user.admin?
+      flash[:error] = "You must be an administrator to access this section"
+      redirect_to root_path # halts request cycle
+    end
+  end
+
   def csv_import
     # CSV schema:
     # name,email,account,course_name
