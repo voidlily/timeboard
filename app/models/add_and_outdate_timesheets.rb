@@ -3,8 +3,20 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     date = DueDate.last
     if Date.today >= date
       todays_date = Date.today
+      self.mark_outstanding_timesheets_late
       self.add_new_timesheets
       self.increment_due_date
+    end
+  end
+
+  def self.mark_outstanding_timesheets_late
+    # This is pretty bad and is going to slow down as more timesheets are added.
+    # Figure out a way to find only drafts
+    Timesheet.all.each do |timesheet|
+      if timesheet.open?
+        timesheet.late = true
+        timesheet.save
+      end
     end
   end
 

@@ -19,10 +19,15 @@ class Timesheet < ActiveRecord::Base
   validates :start_date, :presence => true
   validates :end_date, :presence => true
   #validates_numericality_of :timesheet_length, :equal_to => 13
+  scope :not_late, where(:late => false)
 
   def status
     entry = TimesheetStatus.current(self.id).first
     entry.nil? ? "Draft" : entry.status
+  end
+
+  def open?
+    self.draft? || self.disapproved?
   end
 
   def status_obj
@@ -51,6 +56,10 @@ class Timesheet < ActiveRecord::Base
 
   def processed?
     %w(Processed).include?(self.status)
+  end
+
+  def disapproved?
+    %w(Disapproved).include?(self.status)
   end
 
   def sign!

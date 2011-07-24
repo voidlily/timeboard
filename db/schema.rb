@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110717230133) do
+ActiveRecord::Schema.define(:version => 20110724054035) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20110717230133) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "reopen_reason"
+    t.boolean  "late",          :default => false, :null => false
   end
 
   add_index "timesheets", ["student_id"], :name => "index_timesheets_on_student_id"
