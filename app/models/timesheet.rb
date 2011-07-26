@@ -63,21 +63,29 @@ class Timesheet < ActiveRecord::Base
   end
 
   def sign!
-    self.timesheet_statuses.create(:status => "Signed")
+    if self.open?
+      self.timesheet_statuses.create(:status => "Signed")
+    end
   end
 
   def approve!
-    self.timesheet_statuses.create(:status => "Approved")
+    if self.signed_exactly?
+      self.timesheet_statuses.create(:status => "Approved")
+    end
   end
 
   def reopen(reason)
-    self.timesheet_statuses.create(:status => "Disapproved")
-    self.reopen_reason = reason
-    self.save
+    if self.signed_exactly?
+      self.timesheet_statuses.create(:status => "Disapproved")
+      self.reopen_reason = reason
+      self.save
+    end
   end
 
   def process!
-    self.timesheet_statuses.create(:status => "Processed")
+    if self.approved_exactly?
+      self.timesheet_statuses.create(:status => "Processed")
+    end
   end
 
   def hours
