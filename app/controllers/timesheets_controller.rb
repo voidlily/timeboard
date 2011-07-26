@@ -79,7 +79,6 @@ class TimesheetsController < ApplicationController
 
   def edit
     #TODO what?
-
   end
 
   def create
@@ -102,33 +101,30 @@ class TimesheetsController < ApplicationController
       approve
       return
     end
-    bol = true
+    success = true
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       input_entry_changes = params[:timesheet][:timesheet_entries_attributes]
       @timesheet.timesheet_entries.each do |tse|
-	change = input_entry_changes[tse.id.to_s]
-	if change
-	  tse.hours = change[:hours]
-	  bol = tse.save
-	else
-	  flash[:notice] = "Error Occurred." 
-	  redirect_to @timesheet
-	  return
-	end
+      	change = input_entry_changes[tse.id.to_s]
+      	if change
+      	  tse.hours = change[:hours]
+      	  success = tse.save
+      	else
+      	  flash[:notice] = "Error Occurred." 
+      	  redirect_to @timesheet
+      	  return
+      	end
       end
-      if (bol)
-	flash[:notice] = "Timesheet was successfully saved"
-	redirect_to @timesheet
+      if (success)
+      	flash[:notice] = "Timesheet was successfully saved"
+      	redirect_to @timesheet
       else
-	redirect_to @timesheet
+      	redirect_to @timesheet
       end
     end
-
   end
   
-  
-  #TODO sign? approve? how to make it RESTful?
   private
 
   def approve
