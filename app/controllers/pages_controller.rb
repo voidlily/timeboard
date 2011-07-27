@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter RubyCAS::Filter, :only => :login
   before_filter :check_for_user_in_db
+  before_filter :get_current_user
 
   def home
   end
@@ -40,10 +41,14 @@ class PagesController < ApplicationController
       if User.find_by_account(session[:cas_user]).nil? 
         flash[:error] = "User not found in Timeboard database."
       else
-	@user = User.find_by_account(session[:cas_user])
+	      @user = User.find_by_account(session[:cas_user])
       end
-      
     end
+  end
+
+  def get_current_user
+    # TODO possibly bad, extra query every page load
+    @current_user = User.find_by_account(session[:cas_user])
   end
 end
 
