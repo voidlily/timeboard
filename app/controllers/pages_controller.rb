@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     else
       if user.type == "Student"
         #TODO make this go to current timesheet.
-        if (user.current_timesheet == nil)
+        if user.current_timesheet.nil?
           redirect_to timesheets_path
         else
 	  redirect_to user.current_timesheet
