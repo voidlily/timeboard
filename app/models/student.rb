@@ -26,7 +26,7 @@ class Student < User
   def current_timesheet
     self.timesheets.select { |ts| ts.status == "Draft" }.each do |ts|
       if ts.end_date == DueDate.date
-	return ts
+	      return ts
       end
     end
     return nil

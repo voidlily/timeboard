@@ -1,7 +1,7 @@
 
 <p>Welcome <%= @user.name%> </p>
 <% if(@timesheet_list.empty?) %>
-  <% if @requested_status != nil %>
+  <% unless @requested_status.nil? %>
     <h1>No <%= @requested_status.downcase%> timesheets</hi>
   <% else %>
     <h1>No timesheets </h1>
