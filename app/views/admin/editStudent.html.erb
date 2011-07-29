@@ -44,7 +44,6 @@
     </thead>
     <tbody>
       <% @user_list.each do |user| %>
-	<% if user.active==true %>	
       <tr>
 	<td>
 	  <%= user.id %>
@@ -66,7 +65,6 @@
 	    <%= link_to "Edit User", edit_user_path(user.id) %>
 	  </li>
         </td>
-        <% end %>
       </tr>
        <%end%>	
       <% end %>
