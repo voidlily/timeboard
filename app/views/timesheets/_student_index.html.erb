@@ -1,4 +1,11 @@
-
+<style type="text/css">
+  table tr:nth-child(even) td {
+    background: transparent;
+  }
+  .disapprovedTimesheet {
+    background-color: yellow ! important;
+  }
+</style>
 <p>Welcome <%= @user.name%> </p>
 <% if(@timesheet_list.empty?) %>
   <% unless @requested_status.nil? %>
@@ -26,7 +33,7 @@
     <tbody>
       <% @timesheet_list.each do |timesheet| %>
       <% if timesheet.status == "Disapproved" %>
-        <tr style="background-color: yellow">
+        <tr class="disapprovedTimesheet">
       <% else %>
         <tr>
       <% end %>

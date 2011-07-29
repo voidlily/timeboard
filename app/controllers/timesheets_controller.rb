@@ -171,6 +171,7 @@ class TimesheetsController < ApplicationController
     if professor.timesheets.include?(ts)
       ts.reopen(params[:timesheet][:reopen_reason])
     end
+    flash[:notice] = "Timesheet has been disapproved"
     redirect_to timesheets_path(:status => "Signed")
     
   end
