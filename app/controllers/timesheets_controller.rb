@@ -103,7 +103,7 @@ class TimesheetsController < ApplicationController
       approve
       return
     end
-    success = true
+    error_occurred = false
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       input_entry_changes = params[:timesheet][:timesheet_entries_attributes]
@@ -121,17 +121,18 @@ class TimesheetsController < ApplicationController
 	    redirect_to @timesheet
 	    return
 	  end
-      	  success = tse.save
+      	  error_occurred |= !tse.save
       	else
       	  flash[:notice] = "Error Occurred." 
       	  redirect_to @timesheet
       	  return
       	end
       end
-      if (success)
+      if (!error_occurred)
       	flash[:notice] = "Timesheet was successfully saved"
       	redirect_to @timesheet
       else
+        flash[:error] = "Some errors occurred, check over timesheet and save again"
       	redirect_to @timesheet
       end
     end
