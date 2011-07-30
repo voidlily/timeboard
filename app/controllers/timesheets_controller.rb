@@ -15,6 +15,8 @@ class TimesheetsController < ApplicationController
       if params[:status].nil? || params[:status] == "Open"
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
       else
+	logger.debug "Timesheet List: #{@timesheet_list}"
+	@requested_status = params[:status]
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
       end
     elsif @user.type == 'Professor'
