@@ -1,6 +1,6 @@
 class AddAndOutdateTimesheets < ActiveRecord::Base
   def self.process
-    date = DueDate.last
+    date = DueDate.date
     if Date.today == date
       self.send_reminder_emails
     end

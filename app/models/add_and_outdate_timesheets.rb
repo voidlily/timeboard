@@ -1,6 +1,6 @@
 class AddAndOutdateTimesheets < ActiveRecord::Base
   def self.process
-    date = DueDate.last
+    date = DueDate.date
     if Date.today >= date
       todays_date = Date.today
       self.mark_outstanding_timesheets_late
