@@ -1,0 +1,15 @@
+<div id="holidayListing">
+  <h3> Holidays </h3>
+  <ul>
+    <% @holidays.each do |holiday| %>
+      <li> <%= holiday.date.strftime('%m/%d/%Y') %> </li>
+    <% end %>
+  </ul>
+</div>
+<div id="holidayEntry">
+  <h3> Enter New Holidays <h3>
+   <%= form_tag("/holidays/create", :method => "post") do %>
+      <%= text_area_tag :holidayString %> <br />
+      <%= submit_tag "Submit" %>
+    <% end %>
+</div>
