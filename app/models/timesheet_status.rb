@@ -16,7 +16,7 @@ class TimesheetStatus < ActiveRecord::Base
     where("timesheet_id = ?", timesheet_id.to_i).order("created_at DESC").limit(1)
   }
 
-  types = %w(Draft Signed Approved Processed Disapproved)
+  types = %w(Draft Signed Approved Processed Disapproved Late)
 
   validates :timesheet, :presence => true
   validates :status, :presence => true,

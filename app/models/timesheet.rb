@@ -38,6 +38,10 @@ class Timesheet < ActiveRecord::Base
     self.status == "Draft"
   end
 
+  def open?
+    self.status == "Draft" || self.status == "Disapproved"
+  end
+
   def signed?
     %w(Signed Approved Processed).include?(self.status)
   end
@@ -85,6 +89,12 @@ class Timesheet < ActiveRecord::Base
   def process!
     if self.approved_exactly?
       self.timesheet_statuses.create(:status => "Processed")
+    end
+  end
+
+  def late!
+    if self.open?
+      self.timesheet_statuses.create(:status => "Late")
     end
   end
 
