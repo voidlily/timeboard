@@ -107,10 +107,20 @@ class TimesheetsController < ApplicationController
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       input_entry_changes = params[:timesheet][:timesheet_entries_attributes]
+      holidays = Holiday.all
       @timesheet.timesheet_entries.each do |tse|
       	change = input_entry_changes[tse.id.to_s]
       	if change
       	  tse.hours = change[:hours]
+	  isHoliday = false
+	  holidays.each do |h|
+	    isHoliday = (h.date == tse.date)
+	  end
+          if (isHoliday && tse.hours != 0)
+	    flash[:error] = "You cannot save changes to a holiday"
+	    redirect_to @timesheet
+	    return
+	  end
       	  success = tse.save
       	else
       	  flash[:notice] = "Error Occurred." 
