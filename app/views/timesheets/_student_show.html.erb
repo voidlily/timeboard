@@ -42,7 +42,7 @@
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
 		    <td><%= entry.date.day %><%= fields.text_field :hours, :disabled => @timesheet.status != "Draft" && @timesheet.status != "Disapproved" %></td>
 		    <%= fields.hidden_field :date %>
-                    <%= @weekly_totals = @weekly_totals + entry.hours %>
+                    <% @weekly_totals = @weekly_totals + entry.hours %>
 		<% end %>
 	    <% end %> 
             <td> <%= @weekly_totals %> </td>
@@ -54,7 +54,7 @@
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
 		    <td><%= entry.date.day %><%= fields.text_field :hours, :disabled => @timesheet.status != "Draft" && @timesheet.status != "Disapproved" %></td>
 		    <%= fields.hidden_field :date %>
-                    <%= @weekly_totals = @weekly_totals + entry.hours %>
+                    <% @weekly_totals = @weekly_totals + entry.hours %>
 		<% end %>
 	    <% end %> 
             <td><%= @weekly_totals %></td>
