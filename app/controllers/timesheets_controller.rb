@@ -142,7 +142,7 @@ class TimesheetsController < ApplicationController
   def sign
     student = User.find_by_account(session[:cas_user])
     @timesheet = Timesheet.find(params[:id])
-    if user.timesheets.include?(@timesheet)
+    if student.timesheets.include?(@timesheet)
       if student.type == "Professor"
         @timesheet.approve!
         flash[:notice] = "Timesheet has been approved."
@@ -171,6 +171,7 @@ class TimesheetsController < ApplicationController
     if professor.timesheets.include?(ts)
       ts.reopen(params[:timesheet][:reopen_reason])
     end
+    flash[:notice] = "Timesheet has been disapproved"
     redirect_to timesheets_path(:status => "Signed")
     
   end
