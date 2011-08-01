@@ -112,6 +112,7 @@ class TimesheetsController < ApplicationController
       	change = input_entry_changes[tse.id.to_s]
       	if change
       	  tse.hours = change[:hours]
+	  tse.hours = tse.hours.round(2) #Round to nearest 2 decimal places.
 	  isHoliday = false
 	  holidays.each do |h|
 	    isHoliday = (h.date == tse.date)
