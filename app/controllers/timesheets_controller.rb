@@ -123,13 +123,16 @@ class TimesheetsController < ApplicationController
 	  end
       	  error_occurred |= !tse.save
       	else
-      	  flash[:notice] = "Error Occurred." 
+      	  flash[:error] = "Error Occurred." 
       	  redirect_to @timesheet
       	  return
       	end
       end
+      
       if (!error_occurred)
       	flash[:notice] = "Timesheet was successfully saved"
+	@timesheet.draft!
+	@timesheet.save
       	redirect_to @timesheet
       else
         flash[:error] = "Some errors occurred, check over timesheet and save again"

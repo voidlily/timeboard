@@ -97,6 +97,12 @@ class Timesheet < ActiveRecord::Base
       self.timesheet_statuses.create(:status => "Late")
     end
   end
+  
+  def draft!
+    if self.status == "Disapproved"
+      self.timesheet_statuses.create(:status => "Draft")
+    end
+  end
 
   def hours
     hours = 0
