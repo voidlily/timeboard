@@ -1,6 +1,5 @@
 <header>
-  <%= link_to logo, root_path %>
-  <nav class="round">
+  <nav class="round" style="margin-bottom: 30px">
     <ul>
       <li><%= link_to "Home", root_path %></li>
       <li><%= if(session[:cas_user].nil?)

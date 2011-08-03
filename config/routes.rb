@@ -8,6 +8,8 @@ Timeboard::Application.routes.draw do
   resources :students 
   resources :finances
 
+  resources :holidays
+
   resources :timesheets do
     member do
       put :sign, :approve, :process
@@ -26,7 +28,7 @@ Timeboard::Application.routes.draw do
   match '/admin/addCourse',	:to => 'admin#addCourse'
   match '/admin/removeCourse',	:to => 'admin#removeCourse'
   match '/admin/editCourse',	:to => 'admin#editCourse'
-
+  match '/holidays/create',     :to => 'holidays#create'
   root :to => 'pages#home'
 
   get "pages/home"

@@ -15,6 +15,8 @@ class TimesheetsController < ApplicationController
       if params[:status].nil? || params[:status] == "Open"
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == "Draft" || timesheet.status == "Disapproved"}
       else
+	logger.debug "Timesheet List: #{@timesheet_list}"
+	@requested_status = params[:status]
 	@timesheet_list = @timesheet_list.select{|timesheet| timesheet.status == @requested_status}
       end
     elsif @user.type == 'Professor'
@@ -101,25 +103,40 @@ class TimesheetsController < ApplicationController
       approve
       return
     end
-    success = true
+    error_occurred = false
     if (temp_timesheet.student.account == session[:cas_user])
       @timesheet = temp_timesheet
       input_entry_changes = params[:timesheet][:timesheet_entries_attributes]
+      holidays = Holiday.all
       @timesheet.timesheet_entries.each do |tse|
       	change = input_entry_changes[tse.id.to_s]
       	if change
       	  tse.hours = change[:hours]
-      	  success = tse.save
+	  tse.hours = tse.hours.round(2) #Round to nearest 2 decimal places.
+	  isHoliday = false
+	  holidays.each do |h|
+	    isHoliday = (h.date == tse.date)
+	  end
+          if (isHoliday && tse.hours != 0)
+	    flash[:error] = "You cannot save changes to a holiday"
+	    redirect_to @timesheet
+	    return
+	  end
+      	  error_occurred |= !tse.save
       	else
-      	  flash[:notice] = "Error Occurred." 
+      	  flash[:error] = "Error Occurred." 
       	  redirect_to @timesheet
       	  return
       	end
       end
-      if (success)
+      
+      if (!error_occurred)
       	flash[:notice] = "Timesheet was successfully saved"
+	@timesheet.draft!
+	@timesheet.save
       	redirect_to @timesheet
       else
+        flash[:error] = "Some errors occurred, check over timesheet and save again"
       	redirect_to @timesheet
       end
     end

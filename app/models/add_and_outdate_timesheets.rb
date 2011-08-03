@@ -15,6 +15,7 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     Timesheet.all.each do |timesheet|
       if timesheet.open?
         timesheet.late = true
+	timsheet.late!
         timesheet.save
       end
     end

@@ -9,7 +9,7 @@
 	text-align: center;
     }
     #timesheet {
-	width: 500px;
+	width: 100%;
     }
     th {
 	text-align: left;
@@ -33,24 +33,31 @@
 	    <th> Mon </th>
 	    <th> Tues </th>
 	    <th> Wed </th>
+            <th>Weekly Totals</th>
 	</tr>
 	<tr>
 	    <td> <%= @timesheet.start_date.to_s(:rfc822) %> - <%= (@timesheet.start_date + 6.days).to_s(:rfc822) %> </td>
+            <% @weekly_totals = 0 %>
 	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[0,7].each do |entry| %>
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
-		    <td><%= fields.text_field :hours , :disabled => true %></td>
+		    <td><%= entry.date.day %><%= fields.text_field :hours , :disabled => true %></td>
 		    <%= fields.hidden_field :date %>
+                    <% @weekly_totals = @weekly_totals + entry.hours %>
 		<% end %>
 	    <% end %> 
+            <td><%= @weekly_totals %></td>
 	</tr>
 	<tr>
 	    <td> <%= (@timesheet.end_date - 6.days).to_s(:rfc822) %> - <%= @timesheet.end_date.to_s(:rfc822) %> </td>
+            <% @weekly_totals = 0 %>
 	    <% @timesheet.timesheet_entries.sort! { |a,b| a.created_at <=> b.created_at }[7,14].each do |entry| %>
 		<%= form.fields_for "timesheet_entries_attributes[]", entry do |fields| %>
-		    <td><%= fields.text_field :hours, :disabled => true %></td>
+		    <td><%= entry.date.day %><%= fields.text_field :hours, :disabled => true %></td>
 		    <%= fields.hidden_field :date %>
+                    <% @weekly_totals - @weekly_totals + entry.hours %>
 		<% end %>
 	    <% end %> 
+            <td><%= @weekly_totals %></td>
 	</tr>
     <table>
     <div id="buttonPanel">

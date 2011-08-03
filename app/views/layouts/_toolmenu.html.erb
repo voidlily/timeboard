@@ -25,5 +25,8 @@
     <li>
       <%= link_to "Processed", timesheets_path(:status => "Processed"), :class => "toollink" %>
     </li>
+    <li>
+      <%= link_to "Late", timesheets_path(:status => "Late"), :class => "toollink" %>
+    </li>
   <% end %>
 </ul>
