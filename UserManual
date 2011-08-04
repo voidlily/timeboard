@@ -1,0 +1,60 @@
+Timeboard UserManual, by Bobby King
+
+Contents
+	1: Introduction
+	2: User Admin
+	3: Student Users
+	4: Professor Users
+	5: Finance Users
+
+
+##########################
+#1: Introduction 
+##########################
+	Timeboard is an application built specifically to handle the filling and processing of timesheets for TA's that work for the College of Computing at Georgia Tech.  Currently, this application can only be used for TA's, as they are all on the same project number.  Late Timesheets cannot be filled out on this application as they not only need to be turned into HR, but they are also on a different project number.  However, with email reminders, ease of filling out timesheets at any time throughout the day, and ease of approving timesheets for professors, this should hopefully be a small number of timesheets.
+	Timeboard has three different types of users: Students, Professors, and Finance Users.  Students are the TAs, and they will be the ones who can fill out timesheets for themselves.  They can save and edit timesheets in an open status and view any timesheets that they own.  Professors have a list of courses they teach, and can see all timesheets for their students.  However, they can only approve/disapprove timesheets that their students have signed.  Finance Users can see all timesheets, but only process those that have been approved by professors.  There are also User Admins, who can add users and courses to the system, as well as set holidays.
+
+##########################
+#2: User Admins 
+##########################
+	As stated in the introduction, user admins can add/edit/remove courses and students as well as edit holidays.  User admins can access the admin portion of the application by clicking admin on the left-hand side.  If you do not see that, it means that you are not an admin, and cannot access the admin pages.  Once here, you should see a list of various options that the admin has.  Here is that list:
+	
+	-Add User
+	-Edit User
+	-Remove User
+	-Add Course
+	-Edit Course
+	-Remove Course
+	-Edit Holidays
+	-User Import
+
+	Add User takes the admin to a new page, where the admin can create a new user.  The mandatory fields are name, email, account, and type.  Name is the full name of the user, email is their email address, account is their prism id, and type is whether they are a student, professor, or finance user.  The other fields are necessary at some point for the user to be able to do anything.  Not filling in a course means that the student cannot get his timesheets approved or the professor won't have any timesheets to approve.  Employee Id is only known by finance users, so the professors and students never see them. 
+	Edit Users takes you to a list of all the users in the system.  From this point, you just click the user you want to edit, and it takes you to the same form that you would see as though you were on the add user page.  This time, though, everything is pre-populated with their information.  You just change whatever needs to be changed and click save.
+	Remove Users takes you to the same list of users that you would see as though you clicked the edit users at the main page.  The difference is that you see a remove link next their name instead of an edit link.  Clicking this will remove the user from the system.
+	Add Course is a very simple form that allows you to type the name and pick from the list of professors teaching that course.  The name of the course should be in the format "CSXXXX", not the name of the course it self.  
+	Edit Course allows you to change the professor who is teaching the course.  Like edit users, you will see a list of courses, and an edit button next to it which will allow you to edit the course.
+	Remove Course opens up the same list of courses that you would see by clicking edit course, except that there is a remove link instead of an edit link.
+	Holidays is a one page holiday management system.  The idea here is that the user admin should know what days are holidays, and update them as time passes on.  First, you should see a list of current holidays.  There is also a giant text area with a button allowing you to update the holidays.  To update, type in the date of the holiday in the format "MM/DD/YYYY", and put each date in a new line.  By clicking update, it will remove the current holidays and update them with the entries.
+	User Import opens up a new page, with a text area, and an import button.  Here, copy in the csv, and click import.  This will mark all active students as not active, and then either remark students as active based on their prism ids, or create new students.  The format for the csv row is "Course_Name, prism_id, email, name".  Make sure all courses are added, or problems will arise.
+
+##########################
+#3: Student Users
+##########################
+
+	Students will fill out their timesheets on this application.  That's the major function that the students will be doing.  By logging in from the home page, the student should be redirected to the current timesheet.  If the current timesheet is already signed, it redirects them to their open timesheets.  On the timesheet page, the student should see 2 rows of timesheet entries and 2 buttons, save and sign.  The way this will work is that the student will fill in the timesheets with the hours that they have worked on each day.  This can be done at anytime during the timesheet period.  It will also round to 2 decimal points, so that "2.435" rounds to "2.44".  After making changes, clicking save will save those changes.  On the Wednesday of the due date for the timesheets, you can sign your timesheet by clicking sign.  After doing so, a popup appears with the contract on the bottom of the normal timesheet.  Then, your timesheet is signed and your professor can approve your timesheet.
+	Also, you can see the statuses of your timesheets using the navigation on the left.  Current takes you to your current timesheet if it's still open, or to your open timesheets if their isn't a current timesheet.  Signed shows all the timesheets you signed, but your professor hasn't approved.  Approved shows all the timesheets that are approved by your professor, but not yet processed by the finance users.  Processed means that the information has been sent off to HR by the finance users.  Late are timesheets that were not signed in time, and these must be filled in by hand.
+	You can also see timesheets in your opens timesheets list that has been disapproved.  Disapproved Timesheets are highlighted in yellow, and by clicking on them, you can see the reason it was re-opened on the top of the page.  Making any changes to this changes your timesheet to draft, and you can no longer see the reopen-reason.
+
+##########################
+#4: Professors 
+##########################
+	Professors are the instructors who are in charge of the students.  Their role in this application is to approve and disapprove timesheets.  Upon logging in from the home screen, they are directed towards the timesheets their students have signed.  From here, you would notice that there are checkboxes along the side, along with a checkbox in the header.  If you only look at the total hours for the 2 week time period, then this would allow you to check each student you wish to approve, then click approve on the bottom.  Like the students, you have to verify that you are the one who is approving it in the popup, and then you will see those timesheets have become approved and are not in the signed list.  
+	If you wish to investigate timesheets more closely, you can view the timesheet by clicking on it, and see where the students worked their hours.  On this page, there is a comments section and 2 buttons: Approve and Disapprove.  Clicking approve here opens the same popup as with the mass timesheets, and moves this timesheet to the approved list.  If you wish for this student to look over his or her timesheet again, you can leave a comment, and click disapprove.  This will save that comment as the reopen reason that they will see upon looking at that timesheet, and the timesheet will move in the open timesheets section.
+	Professors can also see all the statuses of all the timesheets their students own.  They can only approve/disapprove timesheets that the student has signed, though.  Professors can use the left hand toolbar in the same way that their students can to keep track of timesheets.
+
+##########################
+#5: Finance Users 
+##########################
+	Finance Users are the users who work for the CoC in processing timesheets for all their employees.  Their role in this application is very simple, which is to use the information given and update their other online applications to log the TAs' timesheets so that they get paid.  As we were told, this app assumes that all TAs are on the same project number, and since late timesheets have to be hand delivered, our application does not handle that.
+	Finance Users will be redirected upon logging in to the approved timesheets list.  Finance Users can see all timesheets in the system, but they can only marked timesheets as processed if the timesheet is currently approved.  They can click on a timesheet and see all the information that they will need to copy over the information to whatever other application that they will be using.  Once they are done, they can mark the timesheet as Processed, and they will be directed back to the list of approved timesheets.  
+	Finance Users can work in parallel on this, meaning that what one finance user does on one machine will directly affect the session of the user on another.
