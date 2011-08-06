@@ -21,8 +21,6 @@ gem 'email_validation'
 gem 'whenever'
 gem 'fastercsv'
 
-gem 'rubycas-client'
-
 # Use unicorn as the web server
 # gem 'unicorn'
 
