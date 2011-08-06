@@ -18,7 +18,6 @@ gem 'rubycas-client-rails', :git => "git://github.com/zuk/rubycas-client-rails.g
 gem 'jquery-rails'
 
 gem 'email_validation'
-gem 'holidays'
 gem 'whenever'
 gem 'fastercsv'
 
