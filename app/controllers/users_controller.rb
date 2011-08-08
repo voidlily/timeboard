@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "User successfully created."
       if @user.type == "Student"
-        AddAndOutdateTimesheets.add_missing_timesheets(@user)
+        student = Student.find(@user.id)
+        AddAndOutdateTimesheets.add_missing_timesheets(student)
       end
       redirect_to @user
     else
