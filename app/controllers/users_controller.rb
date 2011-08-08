@@ -15,6 +15,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:success] = "User successfully created."
+      if @user.type == "Student"
+        AddAndOutdateTimesheets.add_missing_timesheets(@user)
+      end
       redirect_to @user
     else
       flash[:error] = "One or more fields was not filled in or was not of the correct input format."

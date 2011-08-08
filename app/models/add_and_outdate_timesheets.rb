@@ -61,6 +61,7 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     date_obj.save
   end
 
+  # Adds missing timesheets. Should be run if students are added and expected to fill out timesheets right away.
   def self.add_missing_timesheets
     due_date = DueDate.date
     start_date = date - 13.days
@@ -76,4 +77,19 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
       end
     end
   end
+
+  # Automatically run when a new student is added through the controller.
+  def self.add_missing_timesheets(student)
+    due_date = DueDate.date
+    start_date = date - 13.days
+    if student.current_timesheet.nil?
+      timesheet = Timesheet.new(:student_id => student.id, :start_date => start_date, :end_date => due_date)
+      if (timesheet.save)
+        (0..13).each do |i|
+          entry = timesheet.timesheet_entries.create(:date => start_date + i.days, :hours => 0)
+        end
+      end
+    end
+  end
+
 end
