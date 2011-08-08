@@ -60,4 +60,20 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     date_obj.date = date
     date_obj.save
   end
+
+  def self.add_missing_timesheets
+    due_date = DueDate.date
+    start_date = date - 13.days
+    students = Student.active
+    students.each do |student|
+      if student.current_timesheet.nil?
+        timesheet = Timesheet.new(:student_id => student.id, :start_date => start_date, :end_date => due_date)
+        if (timesheet.save)
+          (0..13).each do |i|
+            entry = timesheet.timesheet_entries.create(:date => start_date + i.days, :hours => 0)
+          end
+        end
+      end
+    end
+  end
 end
