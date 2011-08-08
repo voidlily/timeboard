@@ -62,7 +62,7 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
   end
 
   # Adds missing timesheets. Should be run if students are added and expected to fill out timesheets right away.
-  def self.add_missing_timesheets
+  def self.add_all_missing_timesheets
     due_date = DueDate.date
     start_date = date - 13.days
     students = Student.active
