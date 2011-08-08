@@ -52,6 +52,7 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
   end
 
   def self.increment_due_date
+    date = DueDate.date
     while Date.today > date
       date += 2.weeks
     end
