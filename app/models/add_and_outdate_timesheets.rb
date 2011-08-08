@@ -56,6 +56,8 @@ class AddAndOutdateTimesheets < ActiveRecord::Base
     while Date.today > date
       date += 2.weeks
     end
-    date.save
+    date_obj = DueDate.last
+    date_obj.date = date
+    date_obj.save
   end
 end
